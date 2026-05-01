@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -178,7 +178,7 @@ class SpookyAppFootballMatchStats extends \SpookyApp\Model\SpookyAppFootballMatc
                 array (
                     'fixture_id' => 
                     array (
-                        'length' => '120',
+                        'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),

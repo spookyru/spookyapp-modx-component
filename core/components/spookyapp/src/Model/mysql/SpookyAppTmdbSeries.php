@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -10,7 +10,7 @@ class SpookyAppTmdbSeries extends \SpookyApp\Model\SpookyAppTmdbSeries
         'package' => 'SpookyApp\\Model',
         'version' => '3.0',
         'table' => 'spookyapp_tmdb_series',
-        'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'extends' => 'xPDO\\Om\\xPDOObject',
         'tableMeta' => 
         array (
             'engine' => 'InnoDB',
@@ -226,7 +226,7 @@ class SpookyAppTmdbSeries extends \SpookyApp\Model\SpookyAppTmdbSeries
                 array (
                     'id' => 
                     array (
-                        'length' => '120',
+                        'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),

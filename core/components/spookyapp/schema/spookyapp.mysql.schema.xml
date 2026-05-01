@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <model package="SpookyApp\Model" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" version="3.0">
-    <object class="SpookyAppTmdbMovies" table="spookyapp_tmdb_movies" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="SpookyAppTmdbMovies" table="spookyapp_tmdb_movies" extends="xPDO\Om\xPDOObject">
         <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
         <field key="title" dbtype="text" phptype="string" null="true" default=""/>
         <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
@@ -36,7 +36,7 @@
             <column key="release_date" length="" collation="A" null="false"/>
         </index>
     </object>
-<object class="SpookyAppTmdbTrends" table="spookyapp_tmdb_trends" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbTrends" table="spookyapp_tmdb_trends" extends="xPDO\Om\xPDOObject">
 <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
@@ -56,27 +56,27 @@
 	 <field key="black" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
 	 <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbBlackList" table="spookyapp_tmdb_blacklist" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbBlackList" table="spookyapp_tmdb_blacklist" extends="xPDO\Om\xPDOObject">
  <field key="id_tmdb" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
   <field key="id_imdb" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
    <field key="id_kp" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
     <index alias="id_tmdb" name="id_tmdb" primary="true" unique="true" type="BTREE">
-            <column key="id_tmdb" length="120" collation="A" null="false"/>
+            <column key="id_tmdb" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbGenres" table="spookyapp_tmdb_genres" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbGenres" table="spookyapp_tmdb_genres" extends="xPDO\Om\xPDOObject">
    <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="type" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="genre" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="lang" dbtype="text" phptype="string" null="true" default=""/>
 	  <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbSeries" table="spookyapp_tmdb_series" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbSeries" table="spookyapp_tmdb_series" extends="xPDO\Om\xPDOObject">
    <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="name" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="original_name" dbtype="text" phptype="string" null="true" default=""/>
@@ -102,10 +102,10 @@
 	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="lang" dbtype="text" phptype="string" null="true" default=""/>
 	  <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbPersons" table="spookyapp_tmdb_person" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbPersons" table="spookyapp_tmdb_person" extends="xPDO\Om\xPDOObject">
   	 <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="name" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="biography" dbtype="text" phptype="string" null="true" default=""/>
@@ -125,10 +125,10 @@
 	 <field key="movie_credits" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
 	   <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbReleases" table="spookyapp_tmdb_releases" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbReleases" table="spookyapp_tmdb_releases" extends="xPDO\Om\xPDOObject">
   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
@@ -139,10 +139,10 @@
 	 <field key="genre_ids" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="popularity" dbtype="text" phptype="string" null="true" default=""/>	 
 	<index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppTmdbUpComings" table="spookyapp_tmdb_upcoming" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppTmdbUpComings" table="spookyapp_tmdb_upcoming" extends="xPDO\Om\xPDOObject">
    <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
@@ -153,10 +153,10 @@
 	 <field key="release_date" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="dates" dbtype="text" phptype="string" null="true" default=""/>	 
 	<index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppCinemaMovies" table="spookyapp_cinemaprimiera_movies" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppCinemaMovies" table="spookyapp_cinemaprimiera_movies" extends="xPDO\Om\xPDOObject">
   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="Name" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="AgeRestriction" dbtype="text" phptype="string" null="true" default=""/>
@@ -187,10 +187,10 @@
 	 <field key="date" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="active" dbtype="text" phptype="string" null="true" default=""/>
 	   <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppCinemaScheldule" table="spookyapp_cinema_scheldule" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppCinemaScheldule" table="spookyapp_cinema_scheldule" extends="xPDO\Om\xPDOObject">
   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
 	 <field key="geometry" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="city" dbtype="text" phptype="string" null="true" default=""/>
@@ -210,10 +210,10 @@
 	 <field key="active" dbtype="text" phptype="string" null="true" default=""/>
 	 <field key="disable_reservation" dbtype="text" phptype="string" null="true" default=""/>
 	 <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 	 <index alias="movie_id" name="movie_id" primary="false" unique="false" type="BTREE">
-            <column key="movie_id" length="120" collation="A" null="true"/>
+            <column key="movie_id" length="" collation="A" null="true"/>
         </index>
 </object>
 <object class="SpookyAppFootballFixtures" table="spookyapp_football_fixtures" extends="xPDO\Om\xPDOObject">
@@ -256,10 +256,10 @@
   <field key="goals_penalty_away" dbtype="text" phptype="string" null="true" default=""/>
   <field key="referee" dbtype="text" phptype="string" null="true" default=""/>
    <index alias="id" name="id" primary="true" unique="true" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
         </index>
 </object>
-<object class="SpookyAppFootballTables" table="spookyapp_football_tables" extends="xPDO\Om\xPDOSimpleObject">
+<object class="SpookyAppFootballTables" table="spookyapp_football_tables" extends="xPDO\Om\xPDOObject">
   <field key="league_id"  dbtype="varchar" precision="100" phptype="string" null="true" default=""/>
   <field key="league_name" dbtype="text" phptype="string" null="true" default=""/>
   <field key="league_country" dbtype="text" phptype="string" null="true" default=""/>
@@ -297,10 +297,10 @@
   <field key="group_id" dbtype="text" phptype="string" null="true" default=""/>
   <field key="update_standing" dbtype="text" phptype="string" null="true" default=""/>
    <index alias="league_id" name="league_id" primary="true" unique="false" type="BTREE">
-            <column key="league_id" length="120" collation="A" null="false"/>
+            <column key="league_id" length="" collation="A" null="false"/>
     </index>
     <index alias="league_season" name="league_season" primary="false" unique="false" type="BTREE">
-            <column key="league_season" length="120" collation="A" null="false"/>
+            <column key="league_season" length="" collation="A" null="false"/>
     </index>
 </object>
 <object class="SpookyAppFootballMatchStats" table="spookyapp_football_matchstats" extends="xPDO\Om\xPDOObject">
@@ -323,7 +323,7 @@
   <field key="Passes_accurate" dbtype="text" phptype="string" null="true" default=""/>
   <field key="Passes_procent" dbtype="text" phptype="string" null="true" default=""/>
      <index alias="fixture_id" name="fixture_id" primary="true" unique="false" type="BTREE">
-            <column key="fixture_id" length="120" collation="A" null="false"/>
+            <column key="fixture_id" length="" collation="A" null="false"/>
     </index>
 </object>
 <object class="SpookyAppGameInfo" table="spookyapp_game_info" extends="xPDO\Om\xPDOObject">
@@ -386,7 +386,7 @@
 <field key="videos" dbtype="text" phptype="string" null="true" default=""/>
 <field key="websites" dbtype="text" phptype="string" null="true" default=""/>
   <index alias="id" name="id" primary="true" unique="false" type="BTREE">
-            <column key="id" length="120" collation="A" null="false"/>
+            <column key="id" length="" collation="A" null="false"/>
     </index>
 </object>
 </model>

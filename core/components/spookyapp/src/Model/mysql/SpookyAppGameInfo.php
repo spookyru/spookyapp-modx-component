@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -498,7 +498,7 @@ class SpookyAppGameInfo extends \SpookyApp\Model\SpookyAppGameInfo
                 array (
                     'id' => 
                     array (
-                        'length' => '120',
+                        'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
