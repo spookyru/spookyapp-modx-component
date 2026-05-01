@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -10,7 +10,7 @@ class SpookyAppCinemaScheldule extends \SpookyApp\Model\SpookyAppCinemaScheldule
         'package' => 'SpookyApp\\Model',
         'version' => '3.0',
         'table' => 'spookyapp_cinema_scheldule',
-        'extends' => 'xPDO\\Om\\xPDOObject',
+        'extends' => 'xPDO\\Om\\xPDOSimpleObject',
         'tableMeta' => 
         array (
             'engine' => 'InnoDB',

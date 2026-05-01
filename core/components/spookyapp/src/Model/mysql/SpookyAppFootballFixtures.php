@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;

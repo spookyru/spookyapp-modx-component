@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -10,7 +10,7 @@ class SpookyAppTmdbBlackList extends \SpookyApp\Model\SpookyAppTmdbBlackList
         'package' => 'SpookyApp\\Model',
         'version' => '3.0',
         'table' => 'spookyapp_tmdb_blacklist',
-        'extends' => 'xPDO\\Om\\xPDOObject',
+        'extends' => 'xPDO\\Om\\xPDOSimpleObject',
         'tableMeta' => 
         array (
             'engine' => 'InnoDB',

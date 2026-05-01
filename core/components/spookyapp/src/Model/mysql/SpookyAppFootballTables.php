@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SpookyApp\Model\mysql;
 
 use xPDO\xPDO;
@@ -10,7 +10,7 @@ class SpookyAppFootballTables extends \SpookyApp\Model\SpookyAppFootballTables
         'package' => 'SpookyApp\\Model',
         'version' => '3.0',
         'table' => 'spookyapp_football_tables',
-        'extends' => 'xPDO\\Om\\xPDOObject',
+        'extends' => 'xPDO\\Om\\xPDOSimpleObject',
         'tableMeta' => 
         array (
             'engine' => 'InnoDB',
