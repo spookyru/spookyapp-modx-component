@@ -1,0 +1,49 @@
+# Разрешаем:
+#!.gitignore
+#!README.md
+#!sql_simple.sql
+#!joomla_json.php
+#!snippets/
+#!snippets/**
+#!snippets/services/
+#!snippets/services/**
+#!plugins/
+#!plugins/**
+#!plugins/services/
+#!plugins/services/**
+#!ogimage.php
+# === Разрешаем нужные папки ===
+*
+*/
+
+# === Разрешаем .gitignore ===
+!.gitignore
+
+# === Разрешаем README в корне ===
+!README.md
+
+# === Разрешаем core/components/spookyapp ===
+!core/
+!core/components/
+!core/components/spookyapp/
+!core/components/spookyapp/**
+
+# === Исключаем конкретные папки в spookyapp ===
+core/components/spookyapp/__Promts/
+core/components/spookyapp/__Tests-snipents/
+
+# === Разрешаем assets/components/spookyapp ===
+!assets/
+!assets/components/
+!assets/components/spookyapp/
+!assets/components/spookyapp/**
+
+# === Разрешаем пакеты ===
+!core/packages/
+!core/packages/spookyapp-*.zip
+
+# === Исключаем системный мусор ===
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/

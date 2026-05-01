@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="SpookyApp\Model" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" version="3.0">
+    <object class="SpookyAppTmdbMovies" table="spookyapp_tmdb_movies" extends="xPDO\Om\xPDOSimpleObject">
+        <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+        <field key="title" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="overview" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="poster_path" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="backdrop_path" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="belongs_to_collection" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="budget" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="genres" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="homepage" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="imdb_id" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="origin_country" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="original_language" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="production_companies" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="production_countries" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="release_date" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="runtime" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="spoken_languages" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="tagline" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="audio" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="video" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="vote_average" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="vote_count" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="release_dates" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="credits" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="videos" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="external_ids" dbtype="text" phptype="string" null="true" default=""/>
+        <field key="images" dbtype="text" phptype="string" null="true" default=""/>
+        <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="" collation="A" null="false"/>
+        </index>
+		<index alias="release_date" name="release_date" primary="false" unique="false" type="BTREE">
+            <column key="release_date" length="" collation="A" null="false"/>
+        </index>
+    </object>
+<object class="SpookyAppTmdbTrends" table="spookyapp_tmdb_trends" extends="xPDO\Om\xPDOSimpleObject">
+<field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="overview" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="poster_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="backdrop_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="media_type" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="adult" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="original_language" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="genre" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="popularity" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="premier_date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="vote_average" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="vote_count" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="origin_country" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="visible" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="black" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
+	 <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbBlackList" table="spookyapp_tmdb_blacklist" extends="xPDO\Om\xPDOSimpleObject">
+ <field key="id_tmdb" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+  <field key="id_imdb" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+   <field key="id_kp" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+    <index alias="id_tmdb" name="id_tmdb" primary="true" unique="true" type="BTREE">
+            <column key="id_tmdb" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbGenres" table="spookyapp_tmdb_genres" extends="xPDO\Om\xPDOSimpleObject">
+   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="type" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="genre" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="lang" dbtype="text" phptype="string" null="true" default=""/>
+	  <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbSeries" table="spookyapp_tmdb_series" extends="xPDO\Om\xPDOSimpleObject">
+   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="name" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="original_name" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="tagline" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="overview" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="created_by" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="production_countries" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="production_companies" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="first_air_date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="genres" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="homepage" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="origin_country" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="languages" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="original_language" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="poster_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="backdrop_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="networks" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="number_of_seasons" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="number_of_episodes" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="seasons" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="adult" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="credits" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="lang" dbtype="text" phptype="string" null="true" default=""/>
+	  <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbPersons" table="spookyapp_tmdb_person" extends="xPDO\Om\xPDOSimpleObject">
+  	 <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="name" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="biography" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="birthday" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="deathday" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="homepage" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="imdb_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="place_of_birth" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="popularity" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="profile_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="wikidata_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="facebook_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="instagram_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="tiktok_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="twitter_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="youtube_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="movie_credits" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="actual" dbtype="text" phptype="string" null="true" default=""/>
+	   <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbReleases" table="spookyapp_tmdb_releases" extends="xPDO\Om\xPDOSimpleObject">
+  <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="overview" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="poster_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="backdrop_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="release_date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="genre_ids" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="popularity" dbtype="text" phptype="string" null="true" default=""/>	 
+	<index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppTmdbUpComings" table="spookyapp_tmdb_upcoming" extends="xPDO\Om\xPDOSimpleObject">
+   <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="original_title" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="overview" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="poster_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="backdrop_path" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="genre_ids" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="release_date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="dates" dbtype="text" phptype="string" null="true" default=""/>	 
+	<index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppCinemaMovies" table="spookyapp_cinemaprimiera_movies" extends="xPDO\Om\xPDOSimpleObject">
+  <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="Name" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="AgeRestriction" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Duration" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="OtherName" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="SubName" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="UpName" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Remark" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Picture" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="frame" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Media" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Description" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Country" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Director" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Actors" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Genre" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Rating_kinopoisk" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Rating_imdb" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Voicework" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Hit_status" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Youtubeid" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Properties" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="audiofile" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Rental" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="RentalsByFormat" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="City" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="Theater" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="active" dbtype="text" phptype="string" null="true" default=""/>
+	   <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppCinemaScheldule" table="spookyapp_cinema_scheldule" extends="xPDO\Om\xPDOSimpleObject">
+  <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+	 <field key="geometry" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="city" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="theatre_name" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="theatre_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="hall_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="level_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="employment_place_count" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="free_place_count" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="reservation" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="sale" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="movie_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="movie_age_restriction" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="date" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="time" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="format_id" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="active" dbtype="text" phptype="string" null="true" default=""/>
+	 <field key="disable_reservation" dbtype="text" phptype="string" null="true" default=""/>
+	 <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+	 <index alias="movie_id" name="movie_id" primary="false" unique="false" type="BTREE">
+            <column key="movie_id" length="120" collation="A" null="true"/>
+        </index>
+</object>
+<object class="SpookyAppFootballFixtures" table="spookyapp_football_fixtures" extends="xPDO\Om\xPDOObject">
+  <field key="id" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
+  <field key="timezone" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="date" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="timestamp" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="period_1" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="period_2" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="venue_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="stadium" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="city" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="status_long" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="status_short" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="elapsed" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="league_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="league_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="country" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="logo" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="flag" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="season" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="round" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_home_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_home_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_home_logo" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_home_winner" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_away_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_away_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_away_logo" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="teams_away_winner" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_home" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_away" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_halftime_home" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_halftime_away" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_fulltime_home" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_fulltime_away" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_extratime_home" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_extratime_away" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_penalty_home" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_penalty_away" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="referee" dbtype="text" phptype="string" null="true" default=""/>
+   <index alias="id" name="id" primary="true" unique="true" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+        </index>
+</object>
+<object class="SpookyAppFootballTables" table="spookyapp_football_tables" extends="xPDO\Om\xPDOSimpleObject">
+  <field key="league_id"  dbtype="varchar" precision="100" phptype="string" null="true" default=""/>
+  <field key="league_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="league_country" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="league_logo" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="league_season" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="rank" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="team_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="team_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="team_logo" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="point" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goalsdiff" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="group_name" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="form" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="status" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="descr" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="all_played" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="all_win" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="all_draw" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="all_lose" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_for" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="goals_against" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_played" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_win" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_draw" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_lose" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_goals_for" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="home_goals_against" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_played" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_win" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_draw" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_lose" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_goals_for" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="away_goals_against" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="unic_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="group_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="update_standing" dbtype="text" phptype="string" null="true" default=""/>
+   <index alias="league_id" name="league_id" primary="true" unique="false" type="BTREE">
+            <column key="league_id" length="120" collation="A" null="false"/>
+    </index>
+    <index alias="league_season" name="league_season" primary="false" unique="false" type="BTREE">
+            <column key="league_season" length="120" collation="A" null="false"/>
+    </index>
+</object>
+<object class="SpookyAppFootballMatchStats" table="spookyapp_football_matchstats" extends="xPDO\Om\xPDOObject">
+  <field key="fixture_id"  dbtype="varchar" precision="100" phptype="string" null="true" default=""/>
+  <field key="team_id" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Shots_on_Goal" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Shots_off_Goal" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Shots_insidebox" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Shots_outsidebox" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Total_Shots" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Blocked_Shots" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Fouls" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Corner_Kicks" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Offsides" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Ball_Possession" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Yellow_Cards" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Red_Cards" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Goalkeeper_Saves" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Total_passes" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Passes_accurate" dbtype="text" phptype="string" null="true" default=""/>
+  <field key="Passes_procent" dbtype="text" phptype="string" null="true" default=""/>
+     <index alias="fixture_id" name="fixture_id" primary="true" unique="false" type="BTREE">
+            <column key="fixture_id" length="120" collation="A" null="false"/>
+    </index>
+</object>
+<object class="SpookyAppGameInfo" table="spookyapp_game_info" extends="xPDO\Om\xPDOObject">
+<field key="id"  dbtype="varchar" precision="100" phptype="string" null="true" default=""/>
+<field key="age_ratings" dbtype="text" phptype="string" null="true" default=""/>
+<field key="aggregated_rating" dbtype="text" phptype="string" null="true" default=""/>
+<field key="aggregated_rating_count" dbtype="text" phptype="string" null="true" default=""/>
+<field key="alternative_names" dbtype="text" phptype="string" null="true" default=""/>
+<field key="artworks" dbtype="text" phptype="string" null="true" default=""/>
+<field key="bundles" dbtype="text" phptype="string" null="true" default=""/>
+<field key="category" dbtype="text" phptype="string" null="true" default=""/>
+<field key="checksum" dbtype="text" phptype="string" null="true" default=""/>
+<field key="collection" dbtype="text" phptype="string" null="true" default=""/>
+<field key="collections" dbtype="text" phptype="string" null="true" default=""/>
+<field key="cover" dbtype="text" phptype="string" null="true" default=""/>
+<field key="created_at" dbtype="text" phptype="string" null="true" default=""/>
+<field key="dlcs" dbtype="text" phptype="string" null="true" default=""/>
+<field key="expanded_games" dbtype="text" phptype="string" null="true" default=""/>
+<field key="expansions" dbtype="text" phptype="string" null="true" default=""/>
+<field key="external_games" dbtype="text" phptype="string" null="true" default=""/>
+<field key="first_release_date" dbtype="text" phptype="string" null="true" default=""/>
+<field key="follows" dbtype="text" phptype="string" null="true" default=""/>
+<field key="forks" dbtype="text" phptype="string" null="true" default=""/>
+<field key="franchise" dbtype="text" phptype="string" null="true" default=""/>
+<field key="franchises" dbtype="text" phptype="string" null="true" default=""/>
+<field key="game_engines" dbtype="text" phptype="string" null="true" default=""/>
+<field key="game_localizations" dbtype="text" phptype="string" null="true" default=""/>
+<field key="game_modes" dbtype="text" phptype="string" null="true" default=""/>
+<field key="genres" dbtype="text" phptype="string" null="true" default=""/>
+<field key="hypes" dbtype="text" phptype="string" null="true" default=""/>
+<field key="involved_companies" dbtype="text" phptype="string" null="true" default=""/>
+<field key="keywords" dbtype="text" phptype="string" null="true" default=""/>
+<field key="language_supports" dbtype="text" phptype="string" null="true" default=""/>
+<field key="multiplayer_modes" dbtype="text" phptype="string" null="true" default=""/>
+<field key="name" dbtype="text" phptype="string" null="true" default=""/>
+<field key="parent_game" dbtype="text" phptype="string" null="true" default=""/>
+<field key="platforms" dbtype="text" phptype="string" null="true" default=""/>
+<field key="player_perspectives" dbtype="text" phptype="string" null="true" default=""/>
+<field key="ports" dbtype="text" phptype="string" null="true" default=""/>
+<field key="rating" dbtype="text" phptype="string" null="true" default=""/>
+<field key="rating_count" dbtype="text" phptype="string" null="true" default=""/>
+<field key="release_dates" dbtype="text" phptype="string" null="true" default=""/>
+<field key="remakes" dbtype="text" phptype="string" null="true" default=""/>
+<field key="remasters" dbtype="text" phptype="string" null="true" default=""/>
+<field key="screenshots" dbtype="text" phptype="string" null="true" default=""/>
+<field key="similar_games" dbtype="text" phptype="string" null="true" default=""/>
+<field key="slug" dbtype="text" phptype="string" null="true" default=""/>
+<field key="standalone_expansions" dbtype="text" phptype="string" null="true" default=""/>
+<field key="status" dbtype="text" phptype="string" null="true" default=""/>
+<field key="storyline" dbtype="text" phptype="string" null="true" default=""/>
+<field key="summary" dbtype="text" phptype="string" null="true" default=""/>
+<field key="tags" dbtype="text" phptype="string" null="true" default=""/>
+<field key="themes" dbtype="text" phptype="string" null="true" default=""/>
+<field key="total_rating" dbtype="text" phptype="string" null="true" default=""/>
+<field key="total_rating_count" dbtype="text" phptype="string" null="true" default=""/>
+<field key="updated_at" dbtype="text" phptype="string" null="true" default=""/>
+<field key="url" dbtype="text" phptype="string" null="true" default=""/>
+<field key="version_parent" dbtype="text" phptype="string" null="true" default=""/>
+<field key="version_title" dbtype="text" phptype="string" null="true" default=""/>
+<field key="videos" dbtype="text" phptype="string" null="true" default=""/>
+<field key="websites" dbtype="text" phptype="string" null="true" default=""/>
+  <index alias="id" name="id" primary="true" unique="false" type="BTREE">
+            <column key="id" length="120" collation="A" null="false"/>
+    </index>
+</object>
+</model>
+
+
+<!-- 
+SQL code for creating each table described in the schema above:
+
+CREATE TABLE spookyapp_game_info (
+  id TEXT,
+  age_ratings TEXT,
+  aggregated_rating TEXT,
+  aggregated_rating_count TEXT,
+  alternative_names TEXT,
+  artworks TEXT,
+  bundles TEXT,
+  category TEXT,
+  checksum TEXT,
+  collection TEXT,
+  collections TEXT,
+  cover TEXT,
+  created_at TEXT,
+  dlcs TEXT,
+  expanded_games TEXT,
+  expansions TEXT,
+  external_games TEXT,
+  first_release_date TEXT,
+  follows TEXT,
+  forks TEXT,
+  franchise TEXT,
+  franchises TEXT,
+  game_engines TEXT,
+  game_localizations TEXT,
+  game_modes TEXT,
+  genres TEXT,
+  hypes TEXT,
+  involved_companies TEXT,
+  keywords TEXT,
+  language_supports TEXT,
+  multiplayer_modes TEXT,
+  name TEXT,
+  parent_game TEXT,
+  platforms TEXT,
+  player_perspectives TEXT,
+  ports TEXT,
+  rating TEXT,
+  rating_count TEXT,
+  release_dates TEXT,
+  remakes TEXT,
+  remasters TEXT,
+  screenshots TEXT,
+  similar_games TEXT,
+  slug TEXT,
+  standalone_expansions TEXT,
+  status TEXT,
+  storyline TEXT,
+  summary TEXT,
+  tags TEXT,
+  themes TEXT,
+  total_rating TEXT,
+  total_rating_count TEXT,
+  updated_at TEXT,
+  url TEXT,
+  version_parent TEXT,
+  version_title TEXT,
+  videos TEXT,
+  websites TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_movies (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  title TEXT,
+  original_title TEXT,
+  overview TEXT,
+  poster_path TEXT,
+  backdrop_path TEXT,
+  belongs_to_collection TEXT,
+  budget TEXT,
+  genres TEXT,
+  homepage TEXT,
+  imdb_id TEXT,
+  origin_country TEXT,
+  original_language TEXT,
+  production_companies TEXT,
+  production_countries TEXT,
+  release_date TEXT,
+  runtime TEXT,
+  spoken_languages TEXT,
+  tagline TEXT,
+  audio TEXT,
+  video TEXT,
+  vote_average TEXT,
+  vote_count TEXT,
+  release_dates TEXT,
+  credits TEXT,
+  videos TEXT,
+  external_ids TEXT,
+  images TEXT,
+  KEY release_date (release_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_trends (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  original_title TEXT,
+  title TEXT,
+  overview TEXT,
+  poster_path TEXT,
+  backdrop_path TEXT,
+  media_type TEXT,
+  adult TEXT,
+  original_language TEXT,
+  genre TEXT,
+  popularity TEXT,
+  premier_date TEXT,
+  vote_average TEXT,
+  vote_count TEXT,
+  origin_country TEXT,
+  visible TEXT,
+  black TEXT,
+  actual TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_blacklist (
+  id_tmdb VARCHAR(100) NOT NULL PRIMARY KEY,
+  id_imdb VARCHAR(100) NOT NULL,
+  id_kp VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_genres (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  type TEXT,
+  genre TEXT,
+  lang TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_series (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  name TEXT,
+  original_name TEXT,
+  tagline TEXT,
+  overview TEXT,
+  created_by TEXT,
+  production_countries TEXT,
+  production_companies TEXT,
+  first_air_date TEXT,
+  genres TEXT,
+  homepage TEXT,
+  origin_country TEXT,
+  languages TEXT,
+  original_language TEXT,
+  poster_path TEXT,
+  backdrop_path TEXT,
+  networks TEXT,
+  number_of_seasons TEXT,
+  number_of_episodes TEXT,
+  seasons TEXT,
+  adult TEXT,
+  credits TEXT,
+  actual TEXT,
+  lang TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_person (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  name TEXT,
+  biography TEXT,
+  birthday TEXT,
+  deathday TEXT,
+  homepage TEXT,
+  imdb_id TEXT,
+  place_of_birth TEXT,
+  popularity TEXT,
+  profile_path TEXT,
+  wikidata_id TEXT,
+  facebook_id TEXT,
+  instagram_id TEXT,
+  tiktok_id TEXT,
+  twitter_id TEXT,
+  youtube_id TEXT,
+  movie_credits TEXT,
+  actual TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_releases (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  title TEXT,
+  original_title TEXT,
+  overview TEXT,
+  poster_path TEXT,
+  backdrop_path TEXT,
+  release_date TEXT,
+  genre_ids TEXT,
+  popularity TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_tmdb_upcoming (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  title TEXT,
+  original_title TEXT,
+  overview TEXT,
+  poster_path TEXT,
+  backdrop_path TEXT,
+  genre_ids TEXT,
+  release_date TEXT,
+  dates TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_cinemaprimiera_movies (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  Name TEXT,
+  AgeRestriction TEXT,
+  Duration TEXT,
+  OtherName TEXT,
+  SubName TEXT,
+  UpName TEXT,
+  Remark TEXT,
+  Picture TEXT,
+  frame TEXT,
+  Media TEXT,
+  Description TEXT,
+  Country TEXT,
+  Director TEXT,
+  Actors TEXT,
+  Genre TEXT,
+  Rating_kinopoisk TEXT,
+  Rating_imdb TEXT,
+  Voicework TEXT,
+  Hit_status TEXT,
+  Youtubeid TEXT,
+  Properties TEXT,
+  audiofile TEXT,
+  Rental TEXT,
+  RentalsByFormat TEXT,
+  City TEXT,
+  Theater TEXT,
+  date TEXT,
+  active TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_cinema_scheldule (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  geometry TEXT,
+  city TEXT,
+  theatre_name TEXT,
+  theatre_id TEXT,
+  hall_id TEXT,
+  level_id TEXT,
+  employment_place_count TEXT,
+  free_place_count TEXT,
+  reservation TEXT,
+  sale TEXT,
+  movie_id TEXT,
+  movie_age_restriction TEXT,
+  date TEXT,
+  time TEXT,
+  format_id TEXT,
+  active TEXT,
+  disable_reservation TEXT,
+  KEY movie_id (movie_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_football_fixtures (
+  id VARCHAR(100) NOT NULL PRIMARY KEY,
+  timezone TEXT,
+  date TEXT,
+  timestamp TEXT,
+  period_1 TEXT,
+  period_2 TEXT,
+  venue_id TEXT,
+  stadium TEXT,
+  city TEXT,
+  status_long TEXT,
+  status_short TEXT,
+  elapsed TEXT,
+  league_id TEXT,
+  league_name TEXT,
+  country TEXT,
+  logo TEXT,
+  flag TEXT,
+  season TEXT,
+  round TEXT,
+  teams_home_id TEXT,
+  teams_home_name TEXT,
+  teams_home_logo TEXT,
+  teams_home_winner TEXT,
+  teams_away_id TEXT,
+  teams_away_name TEXT,
+  teams_away_logo TEXT,
+  teams_away_winner TEXT,
+  goals_home TEXT,
+  goals_away TEXT,
+  goals_halftime_home TEXT,
+  goals_halftime_away TEXT,
+  goals_fulltime_home TEXT,
+  goals_fulltime_away TEXT,
+  goals_extratime_home TEXT,
+  goals_extratime_away TEXT,
+  goals_penalty_home TEXT,
+  goals_penalty_away TEXT,
+  referee TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_football_tables (
+  league_id TEXT,
+  league_name TEXT,
+  league_country TEXT,
+  league_logo TEXT,
+  league_season TEXT,
+  rank TEXT,
+  team_id TEXT,
+  team_name TEXT,
+  team_logo TEXT,
+  point TEXT,
+  goalsdiff TEXT,
+  group_name TEXT,
+  form TEXT,
+  status TEXT,
+  descr TEXT,
+  all_played TEXT,
+  all_win TEXT,
+  all_draw TEXT,
+  all_lose TEXT,
+  goals_for TEXT,
+  goals_against TEXT,
+  home_played TEXT,
+  home_win TEXT,
+  home_draw TEXT,
+  home_lose TEXT,
+  home_goals_for TEXT,
+  home_goals_against TEXT,
+  away_played TEXT,
+  away_win TEXT,
+  away_draw TEXT,
+  away_lose TEXT,
+  away_goals_for TEXT,
+  away_goals_against TEXT,
+  unic_id TEXT,
+  group_id TEXT,
+  update_standing TEXT,
+  KEY league_id (league_id),
+  KEY league_season (league_season)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE spookyapp_football_matchstats (
+  fixture_id TEXT,
+  team_id TEXT,
+  Shots_on_Goal TEXT,
+  Shots_off_Goal TEXT,
+  Shots_insidebox TEXT,
+  Shots_outsidebox TEXT,
+  Total_Shots TEXT,
+  Blocked_Shots TEXT,
+  Fouls TEXT,
+  Corner_Kicks TEXT,
+  Offsides TEXT,
+  Ball_Possession TEXT,
+  Yellow_Cards TEXT,
+  Red_Cards TEXT,
+  Goalkeeper_Saves TEXT,
+  Total_passes TEXT,
+  Passes_accurate TEXT,
+  Passes_procent TEXT,
+  KEY fixture_id (fixture_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-->

@@ -1,0 +1,1006 @@
+/**
+ * SpookyApp — Manager CSS.
+ *
+ * ═══════════════════════════════════════════════════════════════
+ * Стили UI-компонентов TopicFinder для MODX3 Manager.
+ *
+ * Разделы:
+ *   1. CSS Custom Properties (переменные)
+ *   2. General / Layout
+ *   3. Score Badges
+ *   4. Source Badges
+ *   5. Status Badges
+ *   6. Grid
+ *   7. Details Panel
+ *   8. Filters Panel
+ *   9. Buttons
+ *  10. Toolbar
+ *  11. Windows / Modals
+ *  12. Metadata
+ *  13. Animations
+ *  14. Dark Theme
+ *
+ * @package SpookyApp
+ * @subpackage CSS\Manager
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  1. CSS Custom Properties                                   ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+:root {
+    /* ── Фирменные ──────────────────────────────────────────── */
+    --sa-primary:          #1565c0;
+    --sa-primary-light:    #1e88e5;
+    --sa-primary-dark:     #0d47a1;
+    --sa-primary-bg:       #e3f2fd;
+
+    /* ── Score ──────────────────────────────────────────────── */
+    --sa-score-high:       #2e7d32;
+    --sa-score-high-bg:    #e8f5e9;
+    --sa-score-high-border:#a5d6a7;
+    --sa-score-medium:     #e65100;
+    --sa-score-medium-bg:  #fff3e0;
+    --sa-score-medium-border:#ffcc80;
+    --sa-score-low:        #757575;
+    --sa-score-low-bg:     #f5f5f5;
+    --sa-score-low-border: #e0e0e0;
+
+    /* ── Status ─────────────────────────────────────────────── */
+    --sa-status-new:       #1565c0;
+    --sa-status-new-bg:    #e3f2fd;
+    --sa-status-draft:     #f57f17;
+    --sa-status-draft-bg:  #fffde7;
+    --sa-status-published: #2e7d32;
+    --sa-status-published-bg:#e8f5e9;
+    --sa-status-rejected:  #c62828;
+    --sa-status-rejected-bg:#ffebee;
+
+    /* ── Source ──────────────────────────────────────────────── */
+    --sa-src-newsapi:      #1a73e8;
+    --sa-src-newsapi-bg:   #e8f0fe;
+    --sa-src-reddit:       #ff4500;
+    --sa-src-reddit-bg:    #fff0eb;
+    --sa-src-tmdb:         #01b4e4;
+    --sa-src-tmdb-bg:      #e0f7fa;
+    --sa-src-igdb:          #9b59b6;
+    --sa-src-igdb-bg:       #f3e5f5;
+    --sa-src-github:       #24292e;
+    --sa-src-github-bg:    #f6f8fa;
+    --sa-src-mobileapi:    #00897b;
+    --sa-src-mobileapi-bg: #e0f2f1;
+
+    /* ── Danger ─────────────────────────────────────────────── */
+    --sa-danger:           #c62828;
+    --sa-danger-light:     #e53935;
+    --sa-danger-bg:        #ffebee;
+
+    /* ── Neutral / Layout ───────────────────────────────────── */
+    --sa-text:             #333333;
+    --sa-text-secondary:   #757575;
+    --sa-text-muted:       #9e9e9e;
+    --sa-bg:               #ffffff;
+    --sa-bg-secondary:     #fafafa;
+    --sa-bg-tertiary:      #f5f5f5;
+    --sa-border:           #e0e0e0;
+    --sa-border-light:     #f0f0f0;
+    --sa-shadow:           0 1px 3px rgba(0, 0, 0, 0.08);
+    --sa-shadow-hover:     0 2px 8px rgba(0, 0, 0, 0.12);
+
+    /* ── Radius ─────────────────────────────────────────────── */
+    --sa-radius-sm:        3px;
+    --sa-radius-md:        4px;
+    --sa-radius-lg:        6px;
+
+    /* ── Transitions ────────────────────────────────────────── */
+    --sa-transition:       0.15s ease;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  2. General / Layout                                        ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+/* Фикс для свёрнутой панели */
+.x-layout-collapsed-north {
+    position: relative !important;
+    height: 35px !important;
+    width: 35px !important;
+    background: #d0d0d0 !important;
+    border-bottom: 1px solid #99bbe8 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+}
+
+/* Иконка разворачивания */
+.x-layout-collapsed-north .x-tool-expand-north {
+   content: 'развернуть' !important;
+    background-position: 0 -300px !important;
+    width: 25px !important;
+    height: 25px !important;
+    margin: 6px !important;
+    cursor: pointer !important;
+    display: block !important;
+    visibility: visible !important;
+        left: 2px;
+    bottom: 0px;
+}
+
+.x-layout-collapsed-north .x-tool-expand-north:hover {
+    background-position: -15px -300px !important;
+}
+
+#spookyapp-wrapper {
+    padding: 0;
+}
+
+#spookyapp-panel-wrapper-div {
+    padding: 0;
+}
+
+#spookyapp-panel-topicfinder-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--sa-text);
+}
+
+/* Page header */
+#spookyapp-panel-topicfinder-page .modx-page-header {
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+
+#spookyapp-panel-topicfinder-page .modx-page-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--sa-text);
+    line-height: 1.3;
+}
+
+#spookyapp-panel-topicfinder-page .modx-page-header h2 small {
+    font-weight: 400;
+}
+.spookyapp-details-panel .x-panel-header {
+    padding: 5px 8px;
+}
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  3. Score Badges                                            ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-score {
+    display: inline-block;
+    min-width: 32px;
+    padding: 2px 8px;
+    border-radius: var(--sa-radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+/* >80: green */
+.spookyapp-score-high {
+    color: var(--sa-score-high);
+    background: var(--sa-score-high-bg);
+    border-color: var(--sa-score-high-border);
+}
+
+/* 60–80: orange */
+.spookyapp-score-medium {
+    color: var(--sa-score-medium);
+    background: var(--sa-score-medium-bg);
+    border-color: var(--sa-score-medium-border);
+}
+
+/* <60: gray */
+.spookyapp-score-low {
+    color: var(--sa-score-low);
+    background: var(--sa-score-low-bg);
+    border-color: var(--sa-score-low-border);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  4. Source Badges                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-source {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: var(--sa-radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+
+/* Individual sources */
+.spookyapp-source-newsapi {
+    color: var(--sa-src-newsapi);
+    background: var(--sa-src-newsapi-bg);
+    border-color: rgba(26, 115, 232, 0.2);
+}
+
+.spookyapp-source-reddit {
+    color: var(--sa-src-reddit);
+    background: var(--sa-src-reddit-bg);
+    border-color: rgba(255, 69, 0, 0.2);
+}
+
+.spookyapp-source-tmdb {
+    color: var(--sa-src-tmdb);
+    background: var(--sa-src-tmdb-bg);
+    border-color: rgba(1, 180, 228, 0.2);
+}
+
+.spookyapp-source-igdb {
+    color: var(--sa-src-igdb);
+    background: var(--sa-src-igdb-bg);
+    border-color: rgba(155, 89, 182, 0.2);
+}
+
+.spookyapp-source-github {
+    color: var(--sa-src-github);
+    background: var(--sa-src-github-bg);
+    border-color: rgba(36, 41, 46, 0.15);
+}
+
+.spookyapp-source-mobileapi {
+    color: var(--sa-src-mobileapi);
+    background: var(--sa-src-mobileapi-bg);
+    border-color: rgba(0, 137, 123, 0.2);
+}
+
+/* Fallback for unknown sources */
+.spookyapp-source-unknown {
+    color: var(--sa-text-secondary);
+    background: var(--sa-bg-tertiary);
+    border-color: var(--sa-border);
+}
+
+/* Source icons (Unicode prefix, no font dependency) */
+.spookyapp-source-newsapi::before  { content: "📰 "; }
+.spookyapp-source-reddit::before   { content: "💬 "; }
+.spookyapp-source-tmdb::before     { content: "🎬 "; }
+.spookyapp-source-igdb::before     { content: "🎮 "; }
+.spookyapp-source-github::before   { content: "🐙 "; }
+.spookyapp-source-mobileapi::before { content: "📱 "; }
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  5. Status Badges                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: var(--sa-radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+.spookyapp-status-new {
+    color: var(--sa-status-new);
+    background: var(--sa-status-new-bg);
+    border-color: rgba(21, 101, 192, 0.2);
+}
+
+.spookyapp-status-draft {
+    color: var(--sa-status-draft);
+    background: var(--sa-status-draft-bg);
+    border-color: rgba(245, 127, 23, 0.2);
+}
+
+.spookyapp-status-published {
+    color: var(--sa-status-published);
+    background: var(--sa-status-published-bg);
+    border-color: rgba(46, 125, 50, 0.2);
+}
+
+.spookyapp-status-rejected {
+    color: var(--sa-status-rejected);
+    background: var(--sa-status-rejected-bg);
+    border-color: rgba(198, 40, 40, 0.2);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  6. Grid                                                    ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+/* Grid wrapper */
+#spookyapp-grid-topics {
+    border: 1px solid var(--sa-border);
+    border-radius: var(--sa-radius-md);
+}
+
+/* Row hover */
+#spookyapp-grid-topics .x-grid3-row-over {
+    background-color: var(--sa-primary-bg) !important;
+    cursor: pointer;
+}
+
+/* Selected row */
+#spookyapp-grid-topics .x-grid3-row-selected {
+    background-color: #bbdefb !important;
+    border-color: #90caf9;
+}
+
+/* Title column: bold */
+#spookyapp-grid-topics .spookyapp-col-title {
+    font-weight: 600;
+    color: var(--sa-text);
+}
+
+/* Grid toolbar labels */
+.spookyapp-toolbar-label {
+    font-size: 12px;
+    color: var(--sa-text-secondary);
+    line-height: 26px;
+}
+
+/* Grid paging toolbar */
+#spookyapp-grid-topics .x-toolbar {
+    border-color: var(--sa-border-light);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  7. Details Panel                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+/* Panel wrapper */
+#spookyapp-details-panel {
+    border-left: 1px solid var(--sa-border);
+    background: var(--sa-bg);
+}
+
+#spookyapp-details-panel .x-panel-body {
+    background: var(--sa-bg);
+}
+
+/* Empty state */
+.spookyapp-details-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--sa-text-muted);
+    font-size: 14px;
+    text-align: center;
+    padding: 40px;
+}
+
+.spookyapp-details-empty div:first-child {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+
+/* Header section */
+.spookyapp-details-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--sa-border);
+    background: var(--sa-bg-secondary);
+}
+
+/* Title */
+.spookyapp-details-title,
+.spookyapp-details-header h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--sa-text);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Meta info row */
+.spookyapp-details-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--sa-text-secondary);
+}
+
+/* Category badge in details */
+.spookyapp-details-category {
+    background: #e8eaf6;
+    color: #3949ab;
+    padding: 2px 8px;
+    border-radius: var(--sa-radius-sm);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Score + Date row */
+.spookyapp-details-score-date {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--sa-border-light);
+}
+
+.spookyapp-details-score-date .spookyapp-score {
+    font-size: 24px;
+    padding: 4px 12px;
+}
+
+/* Section labels */
+.spookyapp-details-label {
+    color: var(--sa-text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+/* Description */
+.spookyapp-details-description {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--sa-border-light);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.spookyapp-details-description-empty {
+    color: var(--sa-text-muted);
+    font-style: italic;
+}
+
+/* URL */
+.spookyapp-details-url {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--sa-border-light);
+}
+
+.spookyapp-details-url a {
+    font-size: 12px;
+    color: var(--sa-primary);
+    word-break: break-all;
+    text-decoration: none;
+    transition: color var(--sa-transition);
+}
+
+.spookyapp-details-url a:hover {
+    color: var(--sa-primary-dark);
+    text-decoration: underline;
+}
+
+/* Cached at footer */
+.spookyapp-details-cached {
+    padding: 8px 16px;
+    font-size: 11px;
+    color: var(--sa-text-muted);
+    border-top: 1px solid var(--sa-border-light);
+}
+
+/* Bottom bar */
+#spookyapp-details-panel .x-toolbar {
+    border-top: 1px solid var(--sa-border);
+    background: var(--sa-bg-secondary);
+    padding: 4px;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  8. Filters Panel                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-filters-panel {
+    background: var(--sa-bg-secondary);
+    border-bottom: 1px solid var(--sa-border);
+}
+
+.spookyapp-filters-panel .x-panel-body {
+    background: var(--sa-bg-secondary);
+}
+
+.spookyapp-filters-panel .x-form-check-wrap {
+    margin-right: 4px;
+}
+
+.spookyapp-filters-panel .x-form-cb-label {
+    font-size: 12px;
+    color: var(--sa-text);
+}
+
+.spookyapp-filters-panel .x-form-item-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sa-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Collapsed state hint */
+.spookyapp-filters-panel .x-panel-header {
+    background: var(--sa-bg-tertiary);
+    border-bottom: 1px solid var(--sa-border);
+    padding: 4px 8px;
+}
+
+/* Panel header padding for chunk generator panels */
+#spookyapp-cg-saved-panel .x-panel-header,
+#spookyapp-cg-center .x-panel-header,
+#spookyapp-panel-chunkgenerator .x-panel-header {
+    padding: 6px 10px;
+}
+
+.spookyapp-filters-panel .x-panel-header .x-panel-header-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sa-text-secondary);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  9. Buttons                                                 ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+/* Primary button (MODX standard class) */
+.primary-button {
+    background: var(--sa-primary) !important;
+    color: #fff !important;
+    border: 1px solid var(--sa-primary-dark) !important;
+    border-radius: var(--sa-radius-md);
+    font-weight: 600;
+    transition: background var(--sa-transition),
+                box-shadow var(--sa-transition);
+}
+
+.primary-button:hover {
+    background: var(--sa-primary-light) !important;
+    box-shadow: var(--sa-shadow-hover);
+}
+
+.primary-button:active {
+    background: var(--sa-primary-dark) !important;
+}
+
+/* Primary button — ExtJS table inner */
+.primary-button .x-btn-text {
+    color: #fff !important;
+}
+
+/* Danger button */
+.spookyapp-btn-danger,
+.spookyapp-btn-danger .x-btn-text {
+    color: var(--sa-danger) !important;
+}
+
+.spookyapp-btn-danger:hover {
+    background: var(--sa-danger-bg) !important;
+}
+
+/* Context menu danger item */
+.menu-item-danger {
+    color: var(--sa-danger) !important;
+}
+
+.menu-item-danger:hover {
+    background: var(--sa-danger-bg) !important;
+}
+
+/* Disabled buttons in details bbar */
+#spookyapp-details-panel .x-btn-disabled {
+    opacity: 0.5;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  10. Toolbar                                                ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+/* Grid top toolbar */
+#spookyapp-grid-topics .x-toolbar {
+    padding: 4px 6px;
+}
+
+/* Search field */
+#spookyapp-search-topics {
+    border-radius: var(--sa-radius-md);
+}
+
+/* Combo filters */
+#spookyapp-filter-category,
+#spookyapp-filter-source {
+    font-size: 12px;
+}
+
+/* Page header toolbar */
+.modx-page-header .x-toolbar {
+    background: transparent;
+    border: none;
+    padding: 8px 0 4px;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  11. Windows / Modals                                       ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-window .x-window-header {
+    background: var(--sa-bg-secondary);
+    border-bottom: 1px solid var(--sa-border);
+    padding: 8px 12px;
+}
+
+.spookyapp-window .x-window-header-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sa-text);
+}
+
+.spookyapp-window .x-window-body {
+    background: var(--sa-bg);
+}
+
+/* Fallback details window */
+.spookyapp-details-fallback {
+    padding: 10px;
+}
+
+.spookyapp-details-fallback h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--sa-text);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  12. Metadata                                               ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-metadata-details {
+    border: none;
+    margin: 0;
+}
+
+.spookyapp-metadata-details summary {
+    cursor: pointer;
+    color: var(--sa-text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    outline: none;
+    user-select: none;
+    padding: 4px 0;
+    transition: color var(--sa-transition);
+}
+
+.spookyapp-metadata-details summary:hover {
+    color: var(--sa-text-secondary);
+}
+
+.spookyapp-metadata-details[open] summary {
+    color: var(--sa-text-secondary);
+    margin-bottom: 4px;
+}
+
+.spookyapp-metadata-details table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+.spookyapp-metadata-details td {
+    padding: 4px 8px 4px 0;
+    vertical-align: top;
+    border-bottom: 1px solid var(--sa-bg-tertiary);
+}
+
+.spookyapp-metadata-details td:first-child {
+    color: var(--sa-text-muted);
+    white-space: nowrap;
+    width: 120px;
+}
+
+.spookyapp-metadata-details td:last-child {
+    color: var(--sa-text);
+}
+
+.spookyapp-metadata-details code {
+    font-size: 11px;
+    color: var(--sa-text-secondary);
+    background: var(--sa-bg-tertiary);
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.spookyapp-metadata-details a {
+    color: var(--sa-primary);
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.spookyapp-metadata-details a:hover {
+    text-decoration: underline;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  13. Animations                                             ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+@keyframes spookyapp-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.spookyapp-details-header,
+.spookyapp-details-description,
+.spookyapp-details-url,
+.spookyapp-details-score-date {
+    animation: spookyapp-fade-in 0.2s ease;
+}
+
+/* Mask loading overlay */
+#spookyapp-grid-topics .x-mask-loading {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  14. Dark Theme                                             ║
+   ║                                                             ║
+   ║  MODX 3 does not have a built-in dark mode toggle, but     ║
+   ║  some custom themes add [data-theme="dark"] or             ║
+   ║  .dark-theme class on <body>. We support both.             ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+body.dark-theme,
+[data-theme="dark"] {
+    --sa-primary:          #42a5f5;
+    --sa-primary-light:    #64b5f6;
+    --sa-primary-dark:     #1e88e5;
+    --sa-primary-bg:       #1a2332;
+
+    --sa-score-high:       #66bb6a;
+    --sa-score-high-bg:    #1b2e1b;
+    --sa-score-high-border:#2e7d32;
+    --sa-score-medium:     #ffa726;
+    --sa-score-medium-bg:  #2e2010;
+    --sa-score-medium-border:#e65100;
+    --sa-score-low:        #9e9e9e;
+    --sa-score-low-bg:     #2a2a2a;
+    --sa-score-low-border: #424242;
+
+    --sa-status-new:       #42a5f5;
+    --sa-status-new-bg:    #1a2332;
+    --sa-status-draft:     #ffa726;
+    --sa-status-draft-bg:  #2e2010;
+    --sa-status-published: #66bb6a;
+    --sa-status-published-bg:#1b2e1b;
+    --sa-status-rejected:  #ef5350;
+    --sa-status-rejected-bg:#2e1010;
+
+    --sa-src-newsapi:      #64b5f6;
+    --sa-src-newsapi-bg:   #1a2332;
+    --sa-src-reddit:       #ff7043;
+    --sa-src-reddit-bg:    #2e1810;
+    --sa-src-tmdb:         #4dd0e1;
+    --sa-src-tmdb-bg:      #102e32;
+    --sa-src-igdb:         #ce93d8;
+    --sa-src-igdb-bg:      #2a1a2e;
+    --sa-src-github:       #e0e0e0;
+    --sa-src-github-bg:    #2a2a2a;
+    --sa-src-mobileapi:    #4db6ac;
+    --sa-src-mobileapi-bg: #102e2a;
+
+    --sa-danger:           #ef5350;
+    --sa-danger-light:     #e57373;
+    --sa-danger-bg:        #2e1010;
+
+    --sa-text:             #e0e0e0;
+    --sa-text-secondary:   #9e9e9e;
+    --sa-text-muted:       #757575;
+    --sa-bg:               #1e1e1e;
+    --sa-bg-secondary:     #252525;
+    --sa-bg-tertiary:      #2a2a2a;
+    --sa-border:           #424242;
+    --sa-border-light:     #333333;
+    --sa-shadow:           0 1px 3px rgba(0, 0, 0, 0.3);
+    --sa-shadow-hover:     0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark: grid row overrides */
+body.dark-theme #spookyapp-grid-topics .x-grid3-row-over,
+[data-theme="dark"] #spookyapp-grid-topics .x-grid3-row-over {
+    background-color: var(--sa-primary-bg) !important;
+}
+
+body.dark-theme #spookyapp-grid-topics .x-grid3-row-selected,
+[data-theme="dark"] #spookyapp-grid-topics .x-grid3-row-selected {
+    background-color: #1a3350 !important;
+    border-color: #1e4a7a;
+}
+
+/* Dark: mask overlay */
+body.dark-theme #spookyapp-grid-topics .x-mask-loading,
+[data-theme="dark"] #spookyapp-grid-topics .x-mask-loading {
+    background-color: rgba(30, 30, 30, 0.7);
+}
+
+/* Dark: details category badge */
+body.dark-theme .spookyapp-details-category,
+[data-theme="dark"] .spookyapp-details-category {
+    background: #283593;
+    color: #9fa8da;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  15. Print (hide non-essential)                             ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+@media print {
+    .spookyapp-filters-panel,
+    #spookyapp-details-panel .x-toolbar,
+    .modx-page-header .x-toolbar {
+        display: none !important;
+    }
+
+    #spookyapp-details-panel {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+
+/**
+ * SpookyApp — Chunk Generator Styles
+ *
+ * ═══════════════════════════════════════════════════════════════
+ * Стили для UI Chunk Generator.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ── Tags ─────────────────────────────────────────────────── */
+.spookyapp-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.spookyapp-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #e3f2fd;
+    color: #1565c0;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+/* ── Detail Fields ────────────────────────────────────────── */
+.spookyapp-chunkgen-details-form .x-form-item {
+    margin-bottom: 6px;
+}
+
+.spookyapp-detail-field-wrapper {
+    margin-bottom: 8px;
+}
+
+.spookyapp-detail-field-editable textarea,
+.spookyapp-detail-field-editable input {
+    background: #fffde7;
+    border-color: #ffcc02;
+}
+
+/* ── Buttons inside fields ────────────────────────────────── */
+.spookyapp-btn-translate,
+.spookyapp-btn-voiceover {
+    font-size: 11px !important;
+    margin-right: 4px;
+}
+
+/* ── Grid: Details button ─────────────────────────────────── */
+.spookyapp-btn {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f8f8f8;
+    color: #333;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 18px;
+    text-decoration: none;
+    transition: all 0.15s;
+}
+.spookyapp-btn:hover {
+    background: #e8e8e8;
+    border-color: #999;
+}
+.spookyapp-btn-details {
+    background: #e3f2fd;
+    border-color: #90caf9;
+    color: #1565c0;
+}
+.spookyapp-btn-details:hover {
+    background: #bbdefb;
+}
+
+/* ── Search Form ──────────────────────────────────────────── */
+.spookyapp-chunkgen-search-form {
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* ── Detail Table ─────────────────────────────────────────── */
+.spookyapp-detail-table tr:hover {
+    background: #f5f5f5;
+}
+
+/* ── Chunk Preview ────────────────────────────────────────── */
+.spookyapp-chunk-visual-preview {
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+.spookyapp-chunk-visual-preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ── Rating Stars ─────────────────────────────────────────── */
+.spookyapp-chunkgen-results-grid .x-grid3-cell-inner {
+    line-height: 28px;
+}
+
+/* ── Tab Icons ────────────────────────────────────────────── */
+.icon-film { background-image: url(../img/icons/film.png) !important; }
+.icon-tv { background-image: url(../img/icons/tv.png) !important; }
+.icon-gamepad { background-image: url(../img/icons/gamepad.png) !important; }
+.icon-mobile-phone { background-image: url(../img/icons/mobile.png) !important; }
+.icon-trophy { background-image: url(../img/icons/trophy.png) !important; }
+.icon-shopping-cart { background-image: url(../img/icons/cart.png) !important; }
+
+/* ── Responsive adjustments ───────────────────────────────── */
+.spookyapp-chunkgenerator-tabs .x-tab-strip-text {
+    font-size: 12px;
+}
+
+/* ── Active type-bar tab button ───────────────────────────── */
+#spookyapp-cg-type-bar .x-btn.spookyapp-tab-active .x-btn-text,
+#spookyapp-cg-type-bar .x-btn.x-btn-pressed .x-btn-text {
+    font-weight: bold;
+    color: #1565c0;
+}
+#spookyapp-cg-type-bar .x-btn.spookyapp-tab-active,
+#spookyapp-cg-type-bar .x-btn.x-btn-pressed {
+    background-color: #e3f2fd !important;
+    border-color: #90caf9 !important;
+    box-shadow: inset 0 1px 3px rgba(21,101,192,0.15);
+}
+
+/* ── Device specs editable fields ────────────────────────── */
+.spookyapp-specs-section-overridden .x-fieldset-header-text {
+    color: #1a6b1a;
+    font-weight: bold;
+}
+.spookyapp-specs-section-overridden .x-fieldset-bwrap {
+    border-color: #4caf50 !important;
+}
+.spookyapp-spec-label {
+    font-size: 11px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

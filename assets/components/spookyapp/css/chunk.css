@@ -1,0 +1,905 @@
+/**
+ * SpookyApp — Chunk Templates Styles
+ *
+ * ═══════════════════════════════════════════════════════════════
+ * Общие стили для всех chunk-шаблонов (movie, tvshow, game,
+ * device, person, product).
+ *
+ * БЭМ-подобная методология с префиксом spookyapp-.
+ * Responsive: Mobile-first, breakpoints 576/768/992/1200px.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  CARD — Base                                                ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  BACKDROP                                                   ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__backdrop {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.spookyapp-card__backdrop-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.spookyapp-card__backdrop-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 100%);
+}
+
+@media (min-width: 768px) {
+    .spookyapp-card__backdrop {
+        height: 300px;
+    }
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  BODY                                                       ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__body {
+    padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .spookyapp-card__body {
+        padding: 1.75rem;
+    }
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  HEADER — Poster + Title                                    ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 576px) {
+    .spookyapp-card__header {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+}
+
+
+/* ── Poster ──────────────────────────────────────────────────── */
+
+.spookyapp-card__poster {
+    flex-shrink: 0;
+    width: 150px;
+    align-self: center;
+}
+
+@media (min-width: 576px) {
+    .spookyapp-card__poster {
+        align-self: flex-start;
+    }
+}
+
+.spookyapp-card__poster--device {
+    width: 120px;
+}
+
+.spookyapp-card__poster--person {
+    width: 160px;
+}
+
+.spookyapp-card__poster--product {
+    width: 180px;
+}
+
+.spookyapp-card__poster-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: block;
+}
+
+
+/* ── Title Block ─────────────────────────────────────────────── */
+
+.spookyapp-card__title-block {
+    flex: 1;
+    min-width: 0;
+}
+
+.spookyapp-card__title {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+}
+
+.spookyapp-card__original-title {
+    margin: 0 0 0.25rem;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.spookyapp-card__year {
+    color: #999;
+    font-weight: 400;
+}
+
+.spookyapp-card__tagline {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+.spookyapp-card__brand {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+}
+
+.spookyapp-card__release-date {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.spookyapp-card__category {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.spookyapp-card__age {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 400;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  STATUS BADGE                                               ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    background: #999;
+}
+
+.spookyapp-card__status-badge--returning-series {
+    background: #4caf50;
+}
+
+.spookyapp-card__status-badge--ended {
+    background: #f44336;
+}
+
+.spookyapp-card__status-badge--canceled {
+    background: #9e9e9e;
+}
+
+.spookyapp-card__status-badge--in-production {
+    background: #ff9800;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  RATING                                                     ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.spookyapp-card__rating-star {
+    font-size: 1.2rem;
+    color: #ffc107;
+}
+
+.spookyapp-card__rating-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.spookyapp-card__rating-max {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #999;
+}
+
+.spookyapp-card__vote-count {
+    font-size: 0.8rem;
+    color: #999;
+    font-weight: 400;
+}
+
+.spookyapp-card__rating-stars {
+    font-size: 1.1rem;
+    color: #ffc107;
+    letter-spacing: 2px;
+}
+
+.spookyapp-card__reviews-count {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.spookyapp-card__ratings-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+
+/* ── Metacritic ──────────────────────────────────────────────── */
+
+.spookyapp-card__metacritic {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.spookyapp-card__metacritic-label {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.spookyapp-card__metacritic-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background: #6c3;
+}
+
+
+/* ── Platforms ────────────────────────────────────────────────── */
+
+.spookyapp-card__platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  PRICE                                                      ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__price-block {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.spookyapp-card__price {
+    margin-bottom: 0.5rem;
+}
+
+.spookyapp-card__price-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a73e8;
+}
+
+.spookyapp-card__price-currency {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+.spookyapp-card__price-old {
+    font-size: 0.95rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.spookyapp-card__stock {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.spookyapp-card__stock--available {
+    color: #2e7d32;
+    background: #e8f5e9;
+}
+
+.spookyapp-card__stock--unavailable {
+    color: #c62828;
+    background: #ffebee;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  META LIST                                                  ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__meta {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.spookyapp-card__meta-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+@media (min-width: 576px) {
+    .spookyapp-card__meta-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.spookyapp-card__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+@media (min-width: 768px) {
+    .spookyapp-card__meta-item {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+}
+
+.spookyapp-card__meta-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #888;
+    white-space: nowrap;
+}
+
+.spookyapp-card__meta-value {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  SECTIONS                                                   ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__section {
+    margin-bottom: 1.5rem;
+}
+
+.spookyapp-card__section-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.spookyapp-card__text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+
+/* ── Expandable Text ─────────────────────────────────────────── */
+
+.spookyapp-card__text--expandable {
+    max-height: 300px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease;
+}
+
+.spookyapp-card__text--expandable.is-expanded {
+    max-height: none;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  AUDIO PLAYER                                               ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__audio-player {
+    width: 100%;
+    border-radius: 8px;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  CAST GRID                                                  ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .spookyapp-card__cast-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  SEASONS GRID                                               ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  SCREENSHOTS GRID                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+.spookyapp-card__screenshots-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.spookyapp-card__screenshots-grid img:hover {
+    transform: scale(1.03);
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  FILMOGRAPHY LIST                                           ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__filmography-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.spookyapp-card__filmography-list > * {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.spookyapp-card__filmography-list > *:last-child {
+    border-bottom: none;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  SPECIFICATIONS TABLE (Device)                              ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__specs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spookyapp-card__specs-row:nth-child(odd) {
+    background: #fafafa;
+}
+
+.spookyapp-card__specs-label {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    white-space: nowrap;
+    width: 35%;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.spookyapp-card__specs-value {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.spookyapp-card__specs-value small {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.15rem;
+}
+
+.spookyapp-card__colors {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  SYSTEM REQUIREMENTS (Game)                                 ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__requirements-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .spookyapp-card__requirements-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.spookyapp-card__requirements-col {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.spookyapp-card__requirements-heading {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #555;
+}
+
+.spookyapp-card__requirements-body {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  FEATURES LIST (Product)                                    ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__features-list {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.spookyapp-card__features-list ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.spookyapp-card__features-list li {
+    margin-bottom: 0.35rem;
+    padding-left: 0.25rem;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  OFFERS GRID (Product)                                      ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  FOOTER — Links                                             ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+.spookyapp-card__footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.spookyapp-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.spookyapp-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #f8f8f8;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.spookyapp-card__link:hover {
+    background: #eee;
+    border-color: #ccc;
+    color: #333;
+    text-decoration: none;
+}
+
+.spookyapp-card__link-icon {
+    font-size: 1rem;
+}
+
+.spookyapp-card__link--imdb {
+    border-color: #f5c518;
+    color: #333;
+}
+
+.spookyapp-card__link--imdb:hover {
+    background: #f5c518;
+    color: #000;
+}
+
+.spookyapp-card__link--tmdb {
+    border-color: #01d277;
+    color: #01875f;
+}
+
+.spookyapp-card__link--tmdb:hover {
+    background: #01d277;
+    color: #fff;
+}
+
+.spookyapp-card__link--steam {
+    border-color: #171a21;
+    color: #555;
+}
+
+.spookyapp-card__link--steam:hover {
+    background: #171a21;
+    color: #fff;
+}
+
+.spookyapp-card__link--epic {
+    border-color: #2a2a2a;
+    color: #555;
+}
+
+.spookyapp-card__link--epic:hover {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+.spookyapp-card__link--wiki {
+    border-color: #999;
+    color: #555;
+}
+
+.spookyapp-card__link--wiki:hover {
+    background: #333;
+    color: #fff;
+}
+
+.spookyapp-card__link--buy {
+    border-color: #1a73e8;
+    background: #1a73e8;
+    color: #fff;
+    font-weight: 600;
+}
+
+.spookyapp-card__link--buy:hover {
+    background: #1557b0;
+    border-color: #1557b0;
+    color: #fff;
+}
+
+.spookyapp-card__link--homepage {
+    border-color: #90caf9;
+    color: #1565c0;
+}
+
+.spookyapp-card__link--homepage:hover {
+    background: #e3f2fd;
+}
+
+.spookyapp-card__link--rawg {
+    border-color: #333;
+    color: #555;
+}
+
+.spookyapp-card__link--rawg:hover {
+    background: #333;
+    color: #fff;
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  DARK MODE                                                  ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+@media (prefers-color-scheme: dark) {
+    .spookyapp-card {
+        background: #1e1e1e;
+        color: #e0e0e0;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .spookyapp-card__title {
+        color: #f0f0f0;
+    }
+
+    .spookyapp-card__original-title,
+    .spookyapp-card__tagline,
+    .spookyapp-card__brand,
+    .spookyapp-card__release-date,
+    .spookyapp-card__category {
+        color: #aaa;
+    }
+
+    .spookyapp-card__meta {
+        background: #2a2a2a;
+    }
+
+    .spookyapp-card__meta-label {
+        color: #aaa;
+    }
+
+    .spookyapp-card__meta-value {
+        color: #ddd;
+    }
+
+    .spookyapp-card__section-title {
+        color: #f0f0f0;
+        border-bottom-color: #444;
+    }
+
+    .spookyapp-card__text {
+        color: #ccc;
+    }
+
+    .spookyapp-card__specs-row:nth-child(odd) {
+        background: #252525;
+    }
+
+    .spookyapp-card__specs-label {
+        color: #aaa;
+        border-bottom-color: #333;
+    }
+
+    .spookyapp-card__specs-value {
+        color: #ddd;
+        border-bottom-color: #333;
+    }
+
+    .spookyapp-card__requirements-col {
+        background: #2a2a2a;
+    }
+
+    .spookyapp-card__footer {
+        border-top-color: #333;
+    }
+
+    .spookyapp-card__link {
+        background: #2a2a2a;
+        border-color: #444;
+        color: #bbb;
+    }
+
+    .spookyapp-card__link:hover {
+        background: #333;
+        border-color: #555;
+        color: #fff;
+    }
+
+    .spookyapp-card__rating-value {
+        color: #f0f0f0;
+    }
+
+    .spookyapp-card__stock--available {
+        background: #1b5e20;
+        color: #a5d6a7;
+    }
+
+    .spookyapp-card__stock--unavailable {
+        background: #b71c1c;
+        color: #ef9a9a;
+    }
+}
+
+
+/* ╔═════════════════════════════════════════════════════════════╗
+   ║  PRINT                                                      ║
+   ╚═════════════════════════════════════════════════════════════╝ */
+
+@media print {
+    .spookyapp-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+
+    .spookyapp-card__backdrop {
+        display: none;
+    }
+
+    .spookyapp-card__audio {
+        display: none;
+    }
+
+    .spookyapp-card__link {
+        border: 1px solid #999;
+    }
+
+    .spookyapp-card__link::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.7rem;
+        color: #999;
+    }
+}
