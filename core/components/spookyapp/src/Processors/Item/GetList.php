@@ -108,3 +108,5 @@ class GetList extends GetListProcessor
         return $array;
     }
 }
+
+return 'SpookyApp\Processors\Item\\GetList';

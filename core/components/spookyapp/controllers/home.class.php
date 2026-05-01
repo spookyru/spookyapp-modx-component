@@ -58,13 +58,20 @@ class SpookyAppHomeManagerController extends modExtraManagerController
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/spookyapp.js?time='.time());
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/misc/utils.js?time='.time());
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/misc/combo.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/items.grid.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/movies.grid.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/football.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/games.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/services.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/items.windows.js?time='.time());
-        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/movies.windows.js?time='.time());
+
+        // TopicFinder
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/topicfinder.windows.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/topicfinder.grid.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/topicfinder.panel.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/sections/topicfinder.js?time='.time());
+        // ChunkGenerator
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/chunkgenerator.tabs.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/chunkgenerator.searchform.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/chunkgenerator.grid.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/chunkgenerator.detailsform.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/chunkgenerator.panel.js?time='.time());
+        $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/sections/chunkgenerator.js?time='.time());
+        // Home
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/widgets/home.panel.js?time='.time());
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/sections/home.js?time='.time());
 

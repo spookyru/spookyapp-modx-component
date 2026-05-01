@@ -18,6 +18,10 @@ $xpdo_meta_map = array (
             8 => 'SpookyApp\\Model\\SpookyAppCinemaMovies',
             9 => 'SpookyApp\\Model\\SpookyAppCinemaScheldule',
             10 => 'SpookyApp\\Model\\SpookyAppFootballTables',
+            11 => 'SpookyApp\\Model\\SpookyAppTopic',
+            12 => 'SpookyApp\\Model\\SpookyAppChunk',
+            13 => 'SpookyApp\\Model\\SpookyAppCache',
+            14 => 'SpookyApp\\Model\\SpookyAppMedia',
         ),
         'xPDO\\Om\\xPDOObject' => 
         array (

@@ -9,7 +9,7 @@ class SpookyAppItem extends \SpookyApp\Model\SpookyAppItem
     public static $metaMap = array(
         'package' => 'SpookyApp\\Model',
         'version' => '3.0',
-        'table' => 'superpack_items',
+        'table' => 'spookyapp_items',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
         'tableMeta' =>
             array(

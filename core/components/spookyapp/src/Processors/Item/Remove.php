@@ -39,3 +39,5 @@ class Remove extends Processor
         return $this->success();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Remove';

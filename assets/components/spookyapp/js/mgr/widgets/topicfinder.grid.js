@@ -569,7 +569,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                         items: [{
                                             xtype: 'combo', fieldLabel: 'Language',
                                             name: 'rt_lang', value: 'en',
-                                            store: [['en','English'], ['ru','Russian']],
+                                            store: [['en','English'], ['ru','Russian'], ['uk','Ukrainian']],
                                             valueField: 'field1', displayField: 'field2',
                                             triggerAction: 'all', editable: false, mode: 'local', anchor: '90%'
                                         }]
@@ -579,7 +579,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                         items: [{
                                             xtype: 'combo', fieldLabel: 'Country',
                                             name: 'rt_country', value: 'US',
-                                            store: [['US','US'], ['RU','RU'], ['GB','GB'], ['DE','DE'], ['FR','FR']],
+                                            store: [['US','US'], ['RU','RU'], ['GB','GB'], ['DE','DE'], ['FR','FR'], ['UA','UA']],
                                             valueField: 'field1', displayField: 'field2',
                                             triggerAction: 'all', editable: false, mode: 'local', anchor: '90%'
                                         }]
@@ -631,7 +631,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                     items: [{
                                         xtype: 'combo', fieldLabel: 'Language',
                                         name: 'tna_lang', value: 'en',
-                                        store: [['en','English'], ['ru','Russian']],
+                                        store: [['en','English'], ['ru','Russian'], ['uk','Ukrainian']],
                                         valueField: 'field1', displayField: 'field2',
                                         triggerAction: 'all', editable: false, mode: 'local', anchor: '90%'
                                     }]
@@ -670,7 +670,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                     items: [{
                                         xtype: 'combo', fieldLabel: 'Language',
                                         name: 'nd_lang', value: 'en',
-                                        store: [['en','English'], ['ru','Russian']],
+                                        store: [['en','English'], ['ru','Russian'], ['uk','Ukrainian']],
                                         valueField: 'field1', displayField: 'field2',
                                         triggerAction: 'all', editable: false, mode: 'local', anchor: '90%'
                                     }]
@@ -687,8 +687,8 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                         items: [
                             {
                                 xtype: 'textfield', fieldLabel: 'Subreddits (comma-separated)',
-                                name: 'reddit_subreddits', value: 'technology, programming, gadgets, gaming',
-                                emptyText: 'e.g. technology, programming, gadgets, gaming'
+                                name: 'reddit_subreddits', value: 'technology, programming, gadgets, gaming, HomeImprovement, DIY, gardening, Futurology, biathlon, television, pcgaming, sysadmin, homelab, networking, Android, LocalLLaMA, php, webdev',
+                                emptyText: 'e.g. technology, worldnews'
                             },
                             {
                                 xtype: 'panel', layout: 'column', border: false,
@@ -748,7 +748,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                         items: [{
                                             xtype: 'combo', fieldLabel: 'Language',
                                             name: 'tmdb_tr_lang', value: 'ru-RU',
-                                            store: [['ru-RU','Русский'], ['en-US','English']],
+                                            store: [['ru-RU','Русский'], ['en-US','English'], ['uk-UA','Українська']],
                                             valueField: 'field1', displayField: 'field2',
                                             triggerAction: 'all', editable: false, mode: 'local', anchor: '100%'
                                         }]
@@ -772,7 +772,7 @@ Ext.extend(SpookyApp.grid.Topics, MODx.grid.Grid, {
                                         items: [{
                                             xtype: 'combo', fieldLabel: 'Language',
                                             name: 'tmdb_up_lang', value: 'ru-RU',
-                                            store: [['ru-RU','Русский'], ['en-US','English']],
+                                            store: [['ru-RU','Русский'], ['en-US','English'], ['uk-UA','Українська']],
                                             valueField: 'field1', displayField: 'field2',
                                             triggerAction: 'all', editable: false, mode: 'local', anchor: '90%'
                                         }]

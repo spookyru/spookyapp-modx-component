@@ -41,3 +41,5 @@ class Enable extends Processor
         return $this->success();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Enable';

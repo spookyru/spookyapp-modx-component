@@ -155,4 +155,3 @@ class GenerateIdeas extends Processor
 }
 
 return GenerateIdeas::class;
-

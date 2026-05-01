@@ -119,4 +119,3 @@ class Scoring extends Processor
 }
 
 return Scoring::class;
-

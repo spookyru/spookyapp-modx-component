@@ -28,3 +28,5 @@ class Get extends GetProcessor
         return parent::process();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Get';

@@ -40,3 +40,5 @@ class Disable extends Processor
         return $this->success();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Disable';

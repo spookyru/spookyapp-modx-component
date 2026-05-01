@@ -28,3 +28,5 @@ class Create extends CreateProcessor
         return parent::beforeSet();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Create';

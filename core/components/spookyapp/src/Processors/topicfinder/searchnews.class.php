@@ -74,4 +74,3 @@ class SearchNews extends Processor
 }
 
 return SearchNews::class;
-

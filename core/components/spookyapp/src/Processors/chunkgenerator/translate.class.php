@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\modX;
 
 /**
  * SpookyAppChunkGeneratorTranslateProcessor — перевод текста.
@@ -130,22 +129,21 @@ class SpookyAppChunkGeneratorTranslateProcessor extends Processor
         try {
             $service = $this->getYandexService();
 
+            /** @var mixed $result */
             $result = $service->translate($text, $sourceLang, $targetLang);
 
-            if (empty($result) || !isset($result['text'])) {
-                // Fallback: вернуть массив, если API вернул строку
-                $translatedText = is_string($result) ? $result : '';
-
-                if (empty($translatedText)) {
-                    return $this->failure(
-                        $this->modx->lexicon('spookyapp.chunkgenerator.err_translate_failed')
-                            ?: 'Translation returned empty result'
-                    );
-                }
-            } else {
+            // API может вернуть ['text' => string|array] или просто строку
+            if (is_array($result) && isset($result['text'])) {
                 $translatedText = is_array($result['text'])
                     ? implode(' ', $result['text'])
                     : (string)$result['text'];
+            } elseif (is_string($result) && $result !== '') {
+                $translatedText = $result;
+            } else {
+                return $this->failure(
+                    $this->modx->lexicon('spookyapp.chunkgenerator.err_translate_failed')
+                        ?: 'Translation returned empty result'
+                );
             }
 
             $this->modx->log(

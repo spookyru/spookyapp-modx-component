@@ -49,3 +49,5 @@ class Update extends UpdateProcessor
         return parent::beforeSet();
     }
 }
+
+return 'SpookyApp\Processors\Item\\Update';
