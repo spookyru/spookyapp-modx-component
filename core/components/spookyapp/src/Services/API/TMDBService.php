@@ -10,8 +10,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
 /**
  * TMDBService — клиент для The Movie Database API v3.
  *
@@ -104,8 +107,27 @@ class TMDBService extends APIService
         $this->apiToken     = (string)$this->modx->getOption(self::SETTING_API_TOKEN, null, '');
         $this->cacheEnabled = true;
 
+        // Настраиваем Guzzle HandlerStack с прокси-мидлвером (если proxy активен)
+        $stack = HandlerStack::create();
+        if ($this->proxy->isActive()) {
+            $proxyConfig = $this->proxy;
+            $stack->push(Middleware::mapRequest(
+                static function (\Psr\Http\Message\RequestInterface $request) use ($proxyConfig): \Psr\Http\Message\RequestInterface {
+                    $originalUrl = (string)$request->getUri();
+                    $rewritten   = $proxyConfig->rewrite($originalUrl);
+                    if ($rewritten['url'] !== $originalUrl) {
+                        $request = $request
+                            ->withUri(new Uri($rewritten['url']))
+                            ->withHeader('X-Proxy-Secret', $proxyConfig->getSecretValue());
+                    }
+                    return $request;
+                }
+            ));
+        }
+
         $this->client = new Client([
             'base_uri' => self::BASE_URL,
+            'handler'  => $stack,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $this->apiToken,
                 'Accept'        => 'application/json',

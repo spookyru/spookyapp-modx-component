@@ -976,6 +976,27 @@ body.dark-theme .spookyapp-details-category,
     font-size: 12px;
 }
 
+/* ── Active tab highlight ─────────────────────────────────── */
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active a.x-tab-right,
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active span.x-tab-strip-text {
+    color: #fff !important;
+    font-weight: bold;
+}
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active {
+    background-color: #1565c0 !important;
+    border-radius: 4px 4px 0 0;
+}
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active .x-tab-left,
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active .x-tab-right,
+.spookyapp-chunkgenerator-tabs .x-tab-strip li.x-tab-strip-active .x-tab-strip-inner {
+    background: transparent !important;
+    background-image: none !important;
+}
+.spookyapp-chunkgenerator-tabs .x-tab-strip li:not(.x-tab-strip-active):hover a.x-tab-right,
+.spookyapp-chunkgenerator-tabs .x-tab-strip li:not(.x-tab-strip-active):hover span.x-tab-strip-text {
+    color: #1565c0 !important;
+}
+
 /* ── Active type-bar tab button ───────────────────────────── */
 #spookyapp-cg-type-bar .x-btn.spookyapp-tab-active .x-btn-text,
 #spookyapp-cg-type-bar .x-btn.x-btn-pressed .x-btn-text {

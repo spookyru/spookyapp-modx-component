@@ -28,7 +28,7 @@
 namespace SpookyApp\Snippets;
 
 use MODX\Revolution\modX;
-use SpookyApp\Model\SpookyappChunk;
+use SpookyApp\Model\SpookyAppChunk;
 use xPDO\xPDO;
 
 abstract class BaseChunkSnippet
@@ -184,15 +184,15 @@ abstract class BaseChunkSnippet
      */
     protected function loadFromDatabase($id): ?array
     {
-        /** @var SpookyappChunk|null $chunk */
-        $chunk = $this->modx->getObject(SpookyappChunk::class, [
+        /** @var SpookyAppChunk|null $chunk */
+        $chunk = $this->modx->getObject(SpookyAppChunk::class, [
             'external_id'  => (string) $id,
             'content_type' => $this->getContentType(),
         ]);
 
         if (!$chunk) {
             // Пробуем по первичному ключу
-            $chunk = $this->modx->getObject(SpookyappChunk::class, (int) $id);
+            $chunk = $this->modx->getObject(SpookyAppChunk::class, (int) $id);
         }
 
         if (!$chunk) {
@@ -258,16 +258,23 @@ abstract class BaseChunkSnippet
     {
         $chunkName = !empty($customTemplate) ? $customTemplate : $this->getDefaultTemplate();
 
-        // 1) Пробуем как MODX chunk (из БД)
-        $html = $this->modx->getChunk($chunkName, $placeholders);
+        // 1) Используем pdoTools (Fenom + MODX теги), если доступен
+        $pdoTools = $this->getPdoTools();
+        if ($pdoTools) {
+            $html = $pdoTools->getChunk($chunkName, $placeholders);
+            if ($html !== false && $html !== null && $html !== '') {
+                return (string) $html;
+            }
+        }
 
+        // 2) Fallback: стандартный MODX getChunk (без Fenom)
+        $html = $this->modx->getChunk($chunkName, $placeholders);
         if (!empty($html)) {
             return $html;
         }
 
-        // 2) Пробуем как файловый шаблон (inline chunk from file)
+        // 3) Файловый fallback
         $filePath = $this->resolveChunkFilePath($chunkName);
-
         if ($filePath && file_exists($filePath)) {
             $tpl = file_get_contents($filePath);
             return $this->parsePlaceholders($tpl, $placeholders);
@@ -275,6 +282,29 @@ abstract class BaseChunkSnippet
 
         $this->log("Chunk-шаблон не найден: {$chunkName}", modX::LOG_LEVEL_ERROR);
         return '';
+    }
+
+    /**
+     * Получить экземпляр pdoTools (ModxPro\PdoTools\CoreTools).
+     * Кешируется в static, чтобы не делать лишних обращений к DI.
+     *
+     * @return \ModxPro\PdoTools\CoreTools|null
+     */
+    protected function getPdoTools(): ?object
+    {
+        static $instance = null;
+        static $tried    = false;
+
+        if (!$tried) {
+            $tried = true;
+            try {
+                $instance = $this->modx->services->get(\ModxPro\PdoTools\CoreTools::class);
+            } catch (\Throwable $e) {
+                $instance = null;
+            }
+        }
+
+        return $instance;
     }
 
     /**

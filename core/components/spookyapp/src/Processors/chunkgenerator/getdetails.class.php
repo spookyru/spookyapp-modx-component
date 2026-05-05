@@ -57,6 +57,12 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
     /** @var string Лексикон */
     public $languageTopics = ['spookyapp:chunkgenerator'];
 
+    /** @var \SpookyApp\Services\Proxy\ProxyConfig */
+    private \SpookyApp\Services\Proxy\ProxyConfig $proxy;
+
+    /** @var \SpookyApp\Services\Proxy\ImageCacheService|null */
+    private ?\SpookyApp\Services\Proxy\ImageCacheService $imageCache = null;
+
     // ╔═════════════════════════════════════════════════════════╗
     // ║  Initialize                                             ║
     // ╚═════════════════════════════════════════════════════════╝
@@ -72,6 +78,12 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
         if (file_exists($autoload)) {
             require_once $autoload;
         }
+
+        $this->proxy = \SpookyApp\Services\Proxy\ProxyConfig::fromModx($this->modx);
+        $this->imageCache = new \SpookyApp\Services\Proxy\ImageCacheService(
+            $this->proxy,
+            (string)$this->modx->getOption('base_path')
+        );
 
         $type = trim((string)$this->getProperty('type', ''));
         if (empty($type)) {
@@ -135,7 +147,7 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
                         return $this->success('', [
                             'type'   => $type,
                             'id'     => $id,
-                            'data'   => $savedData,
+                            'data'   => $this->rewriteTmdbImages($savedData),
                             'source' => 'db',
                         ]);
                     }
@@ -158,7 +170,7 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
                         return $this->success('', [
                             'type'   => $type,
                             'id'     => $id,
-                            'data'   => $savedData,
+                            'data'   => $this->rewriteTmdbImages($savedData),
                             'source' => 'db',
                         ]);
                     }
@@ -194,7 +206,7 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
             return $this->success('', [
                 'type' => $type,
                 'id'   => $id,
-                'data' => $data,
+                'data' => $this->rewriteTmdbImages($data),
             ]);
 
         } catch (\Throwable $e) {
@@ -207,6 +219,37 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
                     ?: 'Failed to get details: ' . $e->getMessage()
             );
         }
+    }
+
+    // ╔═════════════════════════════════════════════════════════╗
+    // ║  Private: Image URL Rewrite                             ║
+    // ╚═════════════════════════════════════════════════════════╝
+
+    /**
+     * Скачать и закэшировать все TMDB-изображения на локальный диск.
+     *
+     * Рекурсивно обходит массив; каждая строка с image.tmdb.org (или старый
+     * imgproxy URL) скачивается в images/remote/tmdb/{size}/{file} и
+     * заменяется локальным веб-путём, пригодным для Thumb3x.
+     * Уже закэшированные пути (/images/remote/tmdb/...) пропускаются.
+     * Если прокси недоступен или загрузка не удалась — возвращает исходный URL.
+     */
+    private function rewriteTmdbImages(array $data): array
+    {
+        array_walk_recursive($data, function (&$value): void {
+            if (!is_string($value) || $value === '') {
+                return;
+            }
+            // Обрабатываем TMDB URL, старые imgproxy URL и уже кэшированные пути
+            if (
+                str_contains($value, '://image.tmdb.org/')
+                || str_contains($value, 'imgproxy.php?p=')
+                || str_starts_with($value, '/images/remote/tmdb/')
+            ) {
+                $value = $this->imageCache->cache($value);
+            }
+        });
+        return $data;
     }
 
     // ╔═════════════════════════════════════════════════════════╗

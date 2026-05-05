@@ -158,10 +158,6 @@ class SpookyAppChunkGeneratorSearchProcessor extends Processor
     // ║  Private: Image URL Rewrite                             ║
     // ╚═════════════════════════════════════════════════════════╝
 
-    /**
-     * Перезаписать URL image.tmdb.org в массиве результатов для браузера.
-     * Если прокси отключён — возвращает без изменений.
-     */
     private function rewriteTmdbImages(array $results): array
     {
         array_walk_recursive($results, function (&$value): void {

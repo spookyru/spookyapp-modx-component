@@ -55,6 +55,7 @@ class SpookyAppHomeManagerController extends modExtraManagerController
     public function loadCustomCssJs()
     {
         $this->addCss($this->SpookyApp->config['cssUrl'] . 'mgr/main.css');
+        $this->addCss($this->SpookyApp->config['cssUrl'] . 'mgr/spookyapp.css');
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/spookyapp.js?time='.time());
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/misc/utils.js?time='.time());
         $this->addJavascript($this->SpookyApp->config['jsUrl'] . 'mgr/misc/combo.js?time='.time());
