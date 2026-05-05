@@ -6,6 +6,7 @@ namespace SpookyApp\Services\API;
 
 use MODX\Revolution\modX;
 use SpookyApp\Services\Cache\CacheService;
+use SpookyApp\Services\Proxy\ProxyConfig;
 //use Throwable;
 
 /**
@@ -18,11 +19,13 @@ abstract class APIService
 {
     protected modX $modx;
     protected CacheService $cache;
+    protected ProxyConfig $proxy;
 
     public function __construct(modX $modx, CacheService $cache)
     {
-        $this->modx = $modx;
+        $this->modx  = $modx;
         $this->cache = $cache;
+        $this->proxy = ProxyConfig::fromModx($modx);
     }
 
     /**
@@ -91,9 +94,28 @@ abstract class APIService
         int $timeout = 30,
         bool $decodeJson = true
     ): array {
-        $logUrl    = $this->maskSensitiveUrl($url);
-        $startTime = microtime(true);
-        $this->modx->log(modX::LOG_LEVEL_INFO, "[APIService] → {$method} {$logUrl}");
+        // Применяем прокси-перезапись URL (если proxy_enabled=1 в настройках MODX)
+        $originalUrl = $url;
+        $proxyResult = $this->proxy->rewrite($url);
+        $url         = $proxyResult['url'];
+        $headers     = array_merge($headers, $proxyResult['headers']);
+
+        $proxyApplied = ($url !== $originalUrl);
+        $logUrl       = $this->maskSensitiveUrl($url);
+        $startTime    = microtime(true);
+
+        if ($proxyApplied) {
+            $this->modx->log(modX::LOG_LEVEL_INFO,
+                "[APIService][PROXY] → {$method} {$logUrl}" .
+                " (original: " . $this->maskSensitiveUrl($originalUrl) . ", secret: " .
+                (empty($proxyResult['headers']) ? 'NO HEADER — check proxy_secret setting' : 'OK') . ")");
+        } elseif ($this->proxy->isActive()) {
+            $this->modx->log(modX::LOG_LEVEL_WARN,
+                "[APIService][PROXY] Domain NOT in map, going DIRECT: " .
+                $this->maskSensitiveUrl($originalUrl));
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_INFO, "[APIService] → {$method} {$logUrl}");
+        }
 
         $ch = curl_init();
 
@@ -124,16 +146,19 @@ abstract class APIService
         $elapsed = (int)round((microtime(true) - $startTime) * 1000);
 
         if ($response === false || !empty($curlError)) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, "[APIService] cURL ошибка для {$logUrl}: {$curlError}");
+            $prefix = $proxyApplied ? '[APIService][PROXY]' : '[APIService]';
+            $this->modx->log(modX::LOG_LEVEL_ERROR, "{$prefix} cURL ошибка для {$logUrl}: {$curlError}");
             return ['success' => false, 'data' => null, 'raw' => null, 'error' => $curlError];
         }
 
         if ($httpCode < 200 || $httpCode >= 300) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, "[APIService] HTTP {$httpCode} ({$elapsed}ms) для {$logUrl}: " . mb_substr((string)$response, 0, 500));
+            $prefix = $proxyApplied ? '[APIService][PROXY]' : '[APIService]';
+            $this->modx->log(modX::LOG_LEVEL_ERROR, "{$prefix} HTTP {$httpCode} ({$elapsed}ms) для {$logUrl}: " . mb_substr((string)$response, 0, 500));
             return ['success' => false, 'data' => null, 'raw' => (string)$response, 'error' => "HTTP {$httpCode}"];
         }
 
-        $this->modx->log(modX::LOG_LEVEL_INFO, "[APIService] ← HTTP {$httpCode} ({$elapsed}ms, " . strlen((string)$response) . " байт): {$logUrl}");
+        $prefix = $proxyApplied ? '[APIService][PROXY]' : '[APIService]';
+        $this->modx->log(modX::LOG_LEVEL_INFO, "{$prefix} ← HTTP {$httpCode} ({$elapsed}ms, " . strlen((string)$response) . " байт): {$logUrl}");
         $this->modx->log(modX::LOG_LEVEL_DEBUG, "[APIService] Response preview: " . mb_substr((string)$response, 0, 2000));
 
         if (!$decodeJson) {
