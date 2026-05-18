@@ -72,6 +72,44 @@ if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH . 'config/config.inc
     }
 }
 
+// ── Concurrency limiter ───────────────────────────────────────────────────────
+// Ограничиваем число одновременных запросов к TMDB через прокси (защита от 499).
+// Максимум $maxConcurrent параллельных cURL-запросов; остальные ждут до 8 сек.
+
+$maxConcurrent = 3;
+$lockDir       = sys_get_temp_dir();
+$lockFP        = null;
+$lockIdx       = null;
+$lockDeadline  = time() + 8;
+
+do {
+    for ($i = 0; $i < $maxConcurrent; $i++) {
+        $lf = $lockDir . '/spookyapp_img_' . $i . '.lock';
+        $fp = @fopen($lf, 'c');
+        if ($fp && flock($fp, LOCK_EX | LOCK_NB)) {
+            $lockFP  = $fp;
+            $lockIdx = $i;
+            break 2;
+        }
+        if ($fp) {
+            fclose($fp);
+        }
+    }
+    usleep(200000); // 200ms
+} while (time() < $lockDeadline);
+
+if ($lockFP === null) {
+    http_response_code(503);
+    header('Retry-After: 5');
+    header('Content-Type: text/plain');
+    exit('Image proxy busy, retry shortly');
+}
+
+register_shutdown_function(static function () use ($lockFP): void {
+    flock($lockFP, LOCK_UN);
+    fclose($lockFP);
+});
+
 // ── Build fetch URL ───────────────────────────────────────────────────────────
 
 $imageUrl   = 'https://image.tmdb.org' . $path;
@@ -127,6 +165,20 @@ $isValidImageResponse = static function ($body, int $httpCode, string $ctRaw) us
 if (!$isValidImageResponse($body, $httpCode, $ctRaw) && $fetchUrl !== $imageUrl) {
     [$body, $httpCode, $ctRaw] = $curlFetch($imageUrl, []);
 }
+
+// ── Log request + response ────────────────────────────────────────────────────
+$logFile = $rootPath . 'core/cache/logs/imgproxy.log';
+$logDir  = dirname($logFile);
+if (!is_dir($logDir)) {
+    @mkdir($logDir, 0755, true);
+}
+$logLine = date('[Y-m-d H:i:s]')
+    . ' GET ' . $fetchUrl
+    . ' → HTTP ' . $httpCode
+    . ' size=' . strlen((string)$body)
+    . ($fetchUrl !== $imageUrl ? ' [via proxy]' : ' [direct]')
+    . PHP_EOL;
+@file_put_contents($logFile, $logLine, FILE_APPEND | LOCK_EX);
 
 // ── Validate response ─────────────────────────────────────────────────────────
 

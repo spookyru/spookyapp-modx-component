@@ -453,7 +453,8 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
                 'S%02dE%02d — %s (%s)',
                 $tv['last_episode_to_air']['season_number'] ?? 0,
                 $tv['last_episode_to_air']['episode_number'] ?? 0,
-                $tv['last_episode_to_air']['name'] ?? ''
+                $tv['last_episode_to_air']['name'] ?? '',
+                $tv['last_episode_to_air']['air_date'] ?? ''
             ) : null,
             'last_episode_to_air'  => !empty($tv['last_episode_to_air']) ? [
                 'air_date'       => $tv['last_episode_to_air']['air_date'] ?? '',
@@ -466,7 +467,8 @@ class SpookyAppChunkGeneratorGetDetailsProcessor extends Processor
                 'S%02dE%02d — %s (%s)',
                 $tv['next_episode_to_air']['season_number'] ?? 0,
                 $tv['next_episode_to_air']['episode_number'] ?? 0,
-                $tv['next_episode_to_air']['name'] ?? ''
+                $tv['next_episode_to_air']['name'] ?? '',
+                $tv['next_episode_to_air']['air_date'] ?? ''
             ) : null,
             'next_episode_to_air'  => !empty($tv['next_episode_to_air']) ? [
                 'air_date'       => $tv['next_episode_to_air']['air_date'] ?? '',

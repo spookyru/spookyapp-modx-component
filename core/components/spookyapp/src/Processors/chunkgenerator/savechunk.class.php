@@ -168,11 +168,123 @@ class SpookyAppChunkGeneratorSaveChunkProcessor extends Processor
             }
             // ── / DoH bypass ──────────────────────────────────────────────────
 
+            // Прокси-настройки для загрузки изображений через Amsterdam relay
+            $proxyEnabled  = (bool)$this->modx->getOption('spookyapp.proxy_enabled', null, false);
+            $proxyBaseUrl  = rtrim((string)$this->modx->getOption('spookyapp.proxy_url', null, ''), '/');
+            $proxySecret   = (string)$this->modx->getOption('spookyapp.proxy_secret', null, '');
+            $tmdbCacheBase = MODX_BASE_PATH . 'images/remote/tmdb';
+            $modxLog       = $this->modx; // для логирования внутри static closure
+
             $imgFailed   = false;
-            $cacheImgNow = static function (string $url) use ($imgDir, $imgWeb, &$imgFailed, $curlResolve): string {
-                if (empty($url) || !preg_match('#^https?://#i', $url)) {
+            $imgCount    = 0; // счётчик для добавления задержки между запросами
+
+            /**
+             * Загрузить изображение и вернуть локальный путь.
+             *
+             * Поддерживаемые форматы входного $url:
+             *   1. /images/remote/tmdb/...  → уже кэш, вернуть как есть
+             *   2. /assets/.../imgproxy.php?p=... → TMDB path, скачать в /images/remote/tmdb/
+             *   3. https://...             → прочие (RAWG и т.п.), скачать в assets/spookyapp/
+             */
+            $cacheImgNow = static function (string $url) use (
+                $imgDir, $imgWeb, $tmdbCacheBase,
+                &$imgFailed, &$imgCount, $curlResolve,
+                $proxyEnabled, $proxyBaseUrl, $proxySecret, $modxLog
+            ): string {
+                if (empty($url)) {
                     return $url;
                 }
+
+                // ── Уже локальный TMDB-кэш ──────────────────────────────────
+                if (str_starts_with($url, '/images/remote/tmdb/')) {
+                    return $url;
+                }
+
+                // ── imgproxy URL → скачать в /images/remote/tmdb/ ───────────
+                if (str_contains($url, 'imgproxy.php?p=')) {
+                    $pos      = strpos($url, '?p=');
+                    $tmdbPath = urldecode(substr($url, $pos + 3));
+
+                    if (preg_match('#^/t/p/([a-z0-9]+)/([a-zA-Z0-9_./-]+)$#', $tmdbPath, $pm)) {
+                        $size     = $pm[1];
+                        $filename = basename($pm[2]);
+
+                        if (preg_match('/^[a-zA-Z0-9_.-]+$/', $filename)) {
+                            $localDir  = $tmdbCacheBase . '/' . $size;
+                            $localFile = $localDir . '/' . $filename;
+                            $webPath   = '/images/remote/tmdb/' . $size . '/' . $filename;
+
+                            // Файл уже на диске
+                            if (file_exists($localFile) && filesize($localFile) > 0) {
+                                return $webPath;
+                            }
+
+                            // Небольшая задержка, чтобы не перегружать прокси
+                            if ($imgCount > 0) {
+                                usleep(150000); // 150ms
+                            }
+                            $imgCount++;
+
+                            // Через Amsterdam relay или DoH-direct
+                            if ($proxyEnabled && $proxyBaseUrl !== '') {
+                                $fetchUrl  = $proxyBaseUrl . '/tmdb-img' . $tmdbPath;
+                                $fetchHdrs = ['X-Proxy-Secret: ' . $proxySecret, 'User-Agent: SpookyApp-ImageProxy/1.0'];
+                            } else {
+                                $fetchUrl  = 'https://image.tmdb.org' . $tmdbPath;
+                                $fetchHdrs = ['User-Agent: SpookyApp-ImageProxy/1.0'];
+                            }
+
+                            $modxLog->log(modX::LOG_LEVEL_INFO,
+                                '[SaveChunk:ImgCache] imgproxy → GET ' . $fetchUrl
+                                . ' (path=' . $tmdbPath . ')');
+
+                            $ch = curl_init($fetchUrl);
+                            curl_setopt_array($ch, [
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_TIMEOUT        => 20,
+                                CURLOPT_SSL_VERIFYPEER => false,
+                                CURLOPT_HTTPHEADER     => $fetchHdrs,
+                            ]);
+                            // DoH-resolve только при прямом запросе
+                            if (!empty($curlResolve) && !$proxyEnabled) {
+                                curl_setopt($ch, CURLOPT_RESOLVE, $curlResolve);
+                            }
+                            $imgData  = curl_exec($ch);
+                            $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                            $curlErr  = curl_error($ch);
+                            curl_close($ch);
+
+                            $modxLog->log(modX::LOG_LEVEL_INFO,
+                                '[SaveChunk:ImgCache] ← HTTP ' . $httpCode
+                                . ' size=' . strlen((string)$imgData)
+                                . ($curlErr ? ' cURL_err=' . $curlErr : '')
+                                . ' → ' . $webPath);
+
+                            if ($imgData !== false && $httpCode >= 200 && $httpCode < 300
+                                && strlen((string)$imgData) > 0) {
+                                if (!is_dir($localDir)) {
+                                    @mkdir($localDir, 0755, true);
+                                }
+                                @file_put_contents($localFile, $imgData);
+                                return $webPath;
+                            }
+
+                            // Не удалось скачать — оставляем imgproxy URL (будет загружен браузером)
+                            $modxLog->log(modX::LOG_LEVEL_WARN,
+                                '[SaveChunk:ImgCache] FAILED to download ' . $tmdbPath
+                                . ' HTTP=' . $httpCode . ', kept imgproxy fallback');
+                            return $url;
+                        }
+                    }
+                    return $url;
+                }
+
+                // ── Прочие https:// URL (RAWG и т.п.) ───────────────────────
+                if (!preg_match('#^https?://#i', $url)) {
+                    return $url;
+                }
+
                 $urlPath  = parse_url($url, PHP_URL_PATH) ?: '';
                 $ext      = strtolower(pathinfo($urlPath, PATHINFO_EXTENSION));
                 if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'], true)) {
@@ -182,6 +294,14 @@ class SpookyAppChunkGeneratorSaveChunkProcessor extends Processor
                 $localPath = $imgDir . $filename;
 
                 if (!file_exists($localPath)) {
+                    if ($imgCount > 0) {
+                        usleep(150000); // 150ms
+                    }
+                    $imgCount++;
+
+                    $modxLog->log(modX::LOG_LEVEL_INFO,
+                        '[SaveChunk:ImgCache] direct → GET ' . $url);
+
                     $ch   = curl_init($url);
                     $opts = [
                         CURLOPT_RETURNTRANSFER => true,
@@ -196,7 +316,13 @@ class SpookyAppChunkGeneratorSaveChunkProcessor extends Processor
                     curl_setopt_array($ch, $opts);
                     $imgData  = curl_exec($ch);
                     $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    $curlErr  = curl_error($ch);
                     curl_close($ch);
+
+                    $modxLog->log(modX::LOG_LEVEL_INFO,
+                        '[SaveChunk:ImgCache] ← HTTP ' . $httpCode
+                        . ' size=' . strlen((string)$imgData)
+                        . ($curlErr ? ' cURL_err=' . $curlErr : ''));
 
                     if ($imgData === false || $httpCode < 200 || $httpCode >= 300) {
                         $imgFailed = true;
